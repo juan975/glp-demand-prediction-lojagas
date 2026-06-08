@@ -42,39 +42,30 @@ Este proyecto propone un sistema de predicción que integra múltiples fuentes d
 
 ## Solución propuesta
 
-Se desarrolla un sistema de predicción de demanda de GLP basado en técnicas de
-aprendizaje automático que integra múltiples fuentes de información en una única
-base de datos analítica:
+Se desarrolla un **modelo predictivo de ventas de GLP** que aprende de los datos
+históricos de Lojagas y los combina con información externa — estado de las vías,
+crecimiento poblacional por cantón, eventos regionales y ciclos agrícolas — para
+generar estimaciones de demanda precisas con anticipación suficiente para que la
+empresa pueda planificar sus compras, su logística y su inventario sin depender
+del criterio empírico.
 
-| Fuente | Datos aportados |
-|---|---|
-| **Lojagas · Odoo ERP** | Registros históricos de ventas y distribución por segmento y cantón |
-| **ARCERNNR** | Cupos de GLP asignados por cantón y reportes regulatorios |
-| **INEC** | Estadísticas de crecimiento poblacional y económico por cantón |
-| **SIG / vialidad** | Estado de vías de acceso entre sedes y zonas de distribución |
-| **Eventos regionales** | Calendario de Romería Virgen del Cisne y ciclos agrícolas |
+El proyecto se estructura en cuatro entregables principales:
 
-Sobre esta base se aplica un pipeline de **ingeniería de características** para
-la selección, transformación y enriquecimiento de las variables de entrada.
-Posteriormente se diseñan, entrenan y evalúan múltiples algoritmos:
+- **Base de datos analítica:** integración y limpieza de todas las fuentes de
+  información relevantes para el negocio de Lojagas en una sola base estructurada
+  y lista para ser consultada.
 
-```python
-modelos_candidatos = [
-    "Regresión regularizada (Lasso, Ridge, Elastic Net)",
-    "Random Forest",
-    "Gradient Boosting (XGBoost, LightGBM)",
-    "Redes neuronales recurrentes (LSTM)",
-]
-```
+- **Modelo predictivo:** entrenamiento y comparación de múltiples algoritmos de
+  aprendizaje automático para identificar el que mejor estima las ventas mensuales
+  de GLP por segmento y cantón.
 
-El modelo de mejor desempeño se documenta conforme a **ISO/IEC 23053:2022** y
-su arquitectura de despliegue sigue el **Modelo de Vistas 4+1 de Kruchten**
-bajo la norma **ISO/IEC/IEEE 42010:2022**.
+- **Sistema explicable:** el modelo no solo predice, también indica qué variables
+  están impulsando la demanda en cada período, de forma que la gerencia pueda
+  entender y confiar en las estimaciones.
 
-Como resultado, Lojagas dispondrá de una herramienta capaz de generar
-estimaciones de ventas mensuales y anuales de alta precisión, optimizando
-la planificación comercial, la logística de distribución y la gestión de
-inventarios de forma proactiva y basada en datos.
+- **Documentación de arquitectura:** descripción completa del sistema bajo
+  estándares internacionales ISO, incluyendo el mapa de capacidades del negocio,
+  las vistas arquitectónicas 4+1 y la gestión de riesgos del modelo de IA.
 
 ---
 
@@ -89,19 +80,19 @@ provincias de Loja y Zamora Chinchipe.
 
 ### Objetivos específicos
 
-- 🔍 **Identificar** las variables históricas y contextuales que influyen en el
+- **Identificar** las variables históricas y contextuales que influyen en el
   comportamiento de las ventas de GLP en Lojagas, mediante análisis del negocio,
   revisión bibliográfica y entrevistas con expertos de la empresa.
 
-- 🗄️ **Construir** una base de datos analítica que integre información comercial,
+- **Construir** una base de datos analítica que integre información comercial,
   temporal, geográfica y contextual relevante para el entrenamiento del modelo
   predictivo.
 
-- 🤖 **Diseñar y entrenar** modelos de aprendizaje automático orientados a la
+- **Diseñar y entrenar** modelos de aprendizaje automático orientados a la
   predicción de ventas mensuales y anuales, aplicando las mejores prácticas de
   ingeniería de características y selección de modelos.
 
-- 📊 **Comparar** el desempeño de distintos modelos predictivos mediante métricas
+- **Comparar** el desempeño de distintos modelos predictivos mediante métricas
   de precisión y error (MAE, RMSE, MAPE, R²), seleccionando el modelo de mejor
   rendimiento para su documentación e implementación bajo el marco ISO/IEC 23053:2022.
 
