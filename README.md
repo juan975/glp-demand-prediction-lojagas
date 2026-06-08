@@ -6,8 +6,8 @@
 
 <table align="center">
   <tr>
-    <th align="center">Autora / UX·Data</th>
-    <th align="center">Autor / Data Architect</th>
+    <th align="center">Autora</th>
+    <th align="center">Autor</th>
     <th align="center">Director</th>
   </tr>
   <tr>
