@@ -1,0 +1,23 @@
+name: Tarea
+description: Trabajo de código o documentación
+labels: []
+body:
+  - type: textarea
+    id: objetivo
+    attributes:
+      label: Objetivo
+      description: Qué debe quedar funcionando al cerrar el issue
+    validations:
+      required: true
+  - type: textarea
+    id: criterio
+    attributes:
+      label: Criterio de aceptación
+      description: Cómo se verifica (test, salida, revisión)
+    validations:
+      required: true
+  - type: dropdown
+    id: crisp
+    attributes:
+      label: Fase CRISP-DM
+      options: [negocio, datos, preparacion, modelado, evaluacion, despliegue, no aplica]

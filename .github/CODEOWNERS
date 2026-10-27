@@ -1,0 +1,15 @@
+# Responsable principal por contenedor de Despliegue_v3. La otra persona revisa.
+# Plataforma + Ingesta + Procesamiento → juan975 | ML + Reportes → daravan1
+/docker/                          @juan975
+/docker-compose.yml               @juan975
+/dags/                            @juan975
+/src/lojagas/comun/               @juan975
+/src/lojagas/ingesta/             @juan975
+/src/lojagas/procesamiento/       @juan975
+
+/src/lojagas/ml/                  @daravan1
+/notebooks/                       @daravan1
+
+# Cambian el target o la arquitectura: revisan ambos
+/referencias/mapa_segmentos.csv   @juan975 @daravan1
+/docs/                            @juan975 @daravan1

@@ -1,0 +1,28 @@
+name: Inconsistencia en la tesis
+description: Algo del Word contradice el código, un diagrama o una decisión
+labels: [tesis]
+body:
+  - type: input
+    id: ubicacion
+    attributes:
+      label: Ubicación en el Word
+      placeholder: "Sección 3.4.4, Vista de Despliegue"
+    validations:
+      required: true
+  - type: textarea
+    id: problema
+    attributes:
+      label: Qué dice y por qué está mal
+    validations:
+      required: true
+  - type: textarea
+    id: correccion
+    attributes:
+      label: Corrección propuesta
+  - type: dropdown
+    id: prioridad
+    attributes:
+      label: Prioridad
+      options: [p0-bloqueante, p1-mayor, p2-menor]
+    validations:
+      required: true

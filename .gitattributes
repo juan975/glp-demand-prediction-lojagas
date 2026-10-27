@@ -1,0 +1,9 @@
+# En Windows, Git convierte LF→CRLF y rompe los scripts que corren en Linux
+# (p. ej. el init de PostgreSQL falla con "bad interpreter: /bin/bash^M").
+* text=auto eol=lf
+*.sh text eol=lf
+*.png binary
+*.jpg binary
+*.eapx binary
+*.qea binary
+*.docx binary

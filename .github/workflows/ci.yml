@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  calidad:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.11"
+      - name: Sin datos en el repo
+        run: |
+          if git ls-files | grep -Ei '\.(parquet|xlsx|xls|pkl|joblib|shp|gpkg)$'; then
+            echo "Hay archivos de datos versionados"; exit 1; fi
+          if git ls-files '*.csv' | grep -vE '^(referencias|tests/fixtures)/'; then
+            echo "CSV fuera de referencias/ o tests/fixtures/"; exit 1; fi
+      - run: uv sync --extra ingesta --extra procesamiento --extra ml
+      - run: uv run ruff check .
+      - run: uv run ruff format --check .
+      - run: uv run pytest -m "not integracion" --cov --cov-report=term-missing
+      - name: Sintaxis de DAGs
+        run: python -m py_compile dags/*.py

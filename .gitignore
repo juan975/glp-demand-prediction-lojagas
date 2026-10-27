@@ -1,0 +1,68 @@
+# --- Secretos (el repo es PÚBLICO: nada de esto se sube) ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+secrets/
+credenciales*
+*credentials*.json
+service-account*.json
+
+# --- Datos: NUNCA en git (PII según LOPDP) ---
+# Los datos viven en ${LOJAGAS_DATA_ROOT} del servidor, no en el repo.
+data/
+lakehouse/
+Data Lakehouse/
+mlruns/
+mlartifacts/
+postgres_data/
+pg_data/
+reportes/
+*.parquet
+*.csv
+*.xlsx
+*.xls
+*.shp
+*.dbf
+*.shx
+*.gpkg
+*.tif
+*.pkl
+*.joblib
+# Excepciones: datos públicos construidos a mano y fixtures sintéticos
+!referencias/*.csv
+!tests/fixtures/*.csv
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
+
+# --- Notebooks ---
+.ipynb_checkpoints/
+
+# --- Airflow / MLflow local ---
+logs/
+*.log
+airflow.db
+*.db
+*.sqlite
+
+# --- Documentos internos de Lojagas (diccionario de datos, Word de la tesis) ---
+interno/
+*.docx
+
+# --- Editor / SO ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

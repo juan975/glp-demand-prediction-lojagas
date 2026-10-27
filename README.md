@@ -1,4 +1,4 @@
-# Modelo-predictivo-ventas-Lojagas
+# Modelo predictivo de ventas de GLP — Lojagas
 
 ---
 
@@ -12,12 +12,13 @@
   </tr>
   <tr>
     <td align="center">
-      <img src="https://github.com/user-attachments/assets/your-dara-photo" width="130" height="160" alt="Dara Van Gijsel"><br>
       <a href="https://github.com/daravan1">Dara Van Gijsel Guarnizo</a>
     </td>
     <td align="center">
-      <img src="https://github.com/user-attachments/assets/your-juan-photo" width="130" height="160" alt="Juan Espinosa"><br>
       <a href="https://github.com/juan975">Juan Cristóbal Espinosa Rodas</a>
+    </td>
+    <td align="center">
+      Armando Augusto Cabrera Silva
     </td>
   </tr>
 </table>
@@ -26,76 +27,69 @@
 
 ## Descripción
 
-Este repositorio contiene el código fuente, los artefactos de arquitectura y la documentación técnica del **Trabajo de Integración Curricular (TIC)** desarrollado para la carrera de Computación de la **Universidad Técnica Particular de Loja (UTPL)**.
+Este repositorio contiene el código fuente, los artefactos de arquitectura y la documentación técnica del **Trabajo de Integración Curricular (TIC)** de la carrera de Computación de la **Universidad Técnica Particular de Loja (UTPL)**.
 
-El proyecto consiste en el diseño, entrenamiento y evaluación de un **modelo predictivo de aprendizaje automático** para estimar las ventas mensuales de gas licuado de petróleo (GLP) en toneladas métricas para la empresa **Lojagas C.E.M.**, considerando variables históricas, territoriales, demográficas y coyunturales de las provincias de Loja y Zamora Chinchipe.
+El sistema predice, cada mes y por segmento de negocio, las **toneladas de GLP** que venderá **C.E.M. Lojagas** en el mes siguiente. Combina el histórico de facturación del ERP Odoo con variables territoriales, demográficas y coyunturales de Loja y Zamora Chinchipe: estado vial, población, clima, ciclos agrícolas y eventos como la Romería de la Virgen del Cisne. La predicción anual se obtiene sumando las mensuales.
 
----
-
-## Problema que resuelve
-
-Lojagas opera su planificación de demanda con métodos empíricos basados únicamente en registros históricos de ventas, sin incorporar variables externas de alto impacto como el estado vial en la ruta de abastecimiento, el crecimiento poblacional por cantón, la estacionalidad agrícola o eventos masivos como la **Romería de la Virgen del Cisne** (agosto–octubre). Esto genera incertidumbre operativa que se traduce en sobrestock o desabastecimiento.
-
-Este proyecto propone un sistema de predicción que integra múltiples fuentes de datos para generar estimaciones de alta precisión con un horizonte de 7 a 30 días, habilitando una planificación proactiva y basada en datos.
+Se desarrolla bajo **Design Science Research**, con **CRISP-DM** como subproceso de construcción del modelo y el **Modelo de Vistas 4+1** (ISO/IEC/IEEE 42010:2022) para la descripción arquitectónica. Este repositorio es la **Vista de Desarrollo**: cada paquete de `src/lojagas/` corresponde a un contenedor del diagrama de despliegue (`docs/arquitectura/06-vista-despliegue/`).
 
 ---
 
-## Solución propuesta
+## Estructura
 
-Se desarrolla un **modelo predictivo de ventas de GLP** que aprende de los datos
-históricos de Lojagas y los combina con información externa — estado de las vías,
-crecimiento poblacional por cantón, eventos regionales y ciclos agrícolas — para
-generar estimaciones de demanda precisas con anticipación suficiente para que la
-empresa pueda planificar sus compras, su logística y su inventario sin depender
-del criterio empírico.
+```
+├── src/lojagas/
+│   ├── comun/            config, acceso al Lakehouse (Delta Lake), trazabilidad
+│   ├── ingesta/          «Contenedor Ingesta»: ingesta.py, odoo_api.py, externas/
+│   ├── procesamiento/    «Contenedor Procesamiento»: curacion.py, ingenieria_caracteristicas.py
+│   ├── ml/               «Contenedor ML»: pipeline_entrenamiento.py, evaluacion.py,
+│   │                      predictor.py, generar_reportes.py, modelos/
+│   └── cli.py            `lojagas <subcomando>`: lo que lanza Airflow en cada contenedor
+├── dags/                 DAGs de Airflow (prediccion_mensual, reentrenamiento)
+├── docker/               un Dockerfile por contenedor + init de PostgreSQL
+├── referencias/          datos públicos o de definición propia (calendario, mapa de segmentos)
+├── tests/                solo datos sintéticos
+├── notebooks/            EDA; nunca código de producción
+└── docs/
+    ├── arquitectura/     01-mapa-capacidades … 10-testing, trazabilidad.md
+    ├── adr/              decisiones de arquitectura
+    ├── inconsistencias.md   backlog de correcciones del Word y los diagramas
+    ├── model_card.md     ISO/IEC 23053
+    └── registro_riesgos.md  ISO/IEC 23894
+```
 
-El proyecto se estructura en cuatro entregables principales:
-
-- **Base de datos analítica:** integración y limpieza de todas las fuentes de
-  información relevantes para el negocio de Lojagas en una sola base estructurada
-  y lista para ser consultada.
-
-- **Modelo predictivo:** entrenamiento y comparación de múltiples algoritmos de
-  aprendizaje automático para identificar el que mejor estima las ventas mensuales
-  de GLP por segmento y cantón.
-
-- **Sistema explicable:** el modelo no solo predice, también indica qué variables
-  están impulsando la demanda en cada período, de forma que la gerencia pueda
-  entender y confiar en las estimaciones.
-
-- **Documentación de arquitectura:** descripción completa del sistema bajo
-  estándares internacionales ISO, incluyendo el mapa de capacidades del negocio,
-  las vistas arquitectónicas 4+1 y la gestión de riesgos del modelo de IA.
+Los datos **no viven en el repositorio**. El Lakehouse, `mlruns/`, `pg_data/` y `reportes/` se montan desde `${LOJAGAS_DATA_ROOT}` en el servidor on-premise de Lojagas.
 
 ---
 
-## Objetivos del proyecto
+## Empezar
 
-### Objetivo general
-Desarrollar un modelo predictivo de aprendizaje automático para estimar las ventas
-mensuales y anuales de gas licuado de petróleo de la empresa Lojagas C.E.M.,
-considerando variables históricas, territoriales y coyunturales, mediante datos
-recopilados de la empresa y fuentes de información geográfica y contextual de las
-provincias de Loja y Zamora Chinchipe.
+```bash
+uv sync --all-extras          # entorno completo (Python 3.11)
+uv run pre-commit install     # bloquea datos y secretos antes de cada commit
+uv run pytest                 # tests con datos sintéticos
+```
 
-### Objetivos específicos
+Plataforma completa (requiere Docker):
 
-- **Identificar** las variables históricas y contextuales que influyen en el
-  comportamiento de las ventas de GLP en Lojagas, mediante análisis del negocio,
-  revisión bibliográfica y entrevistas con expertos de la empresa.
+```bash
+cp .env.example .env && make dirs && make build && docker compose up -d
+```
 
-- **Construir** una base de datos analítica que integre información comercial,
-  temporal, geográfica y contextual relevante para el entrenamiento del modelo
-  predictivo.
+La configuración del equipo de cada integrante está en [`docs/entorno.md`](docs/entorno.md). Las reglas de trabajo están en [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
-- **Diseñar y entrenar** modelos de aprendizaje automático orientados a la
-  predicción de ventas mensuales y anuales, aplicando las mejores prácticas de
-  ingeniería de características y selección de modelos.
+---
 
-- **Comparar** el desempeño de distintos modelos predictivos mediante métricas
-  de precisión y error (MAE, RMSE, MAPE, R²), seleccionando el modelo de mejor
-  rendimiento para su documentación e implementación bajo el marco ISO/IEC 23053:2022.
+## Objetivos
+
+**General:** desarrollar un modelo predictivo de aprendizaje automático para estimar las ventas mensuales y anuales de GLP de Lojagas C.E.M., considerando variables históricas, territoriales y coyunturales de las provincias de Loja y Zamora Chinchipe.
+
+**Específicos:**
+- **Identificar** las variables históricas y contextuales que influyen en las ventas de GLP.
+- **Construir** una base de datos analítica que integre información comercial, temporal, geográfica y contextual.
+- **Diseñar y entrenar** modelos de aprendizaje automático para la predicción mensual y anual.
+- **Comparar** su desempeño (MAE, RMSE, MAPE, WAPE, R²) frente a baselines ingenuos y documentar el seleccionado bajo ISO/IEC 23053:2022.
 
 <p align="center">
-  <sub>© 2025 Dara Van Gijsel Guarnizo · Juan Cristóbal Espinosa Rodas — UTPL, Loja, Ecuador</sub>
+  <sub>© 2026 Dara Van Gijsel Guarnizo · Juan Cristóbal Espinosa Rodas — UTPL, Loja, Ecuador. Uso restringido: los datos pertenecen a C.E.M. Lojagas.</sub>
 </p>
