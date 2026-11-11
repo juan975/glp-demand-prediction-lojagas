@@ -41,7 +41,7 @@ ml = [
     "xgboost>=2.1",
     "lightgbm>=4.5",
     "optuna>=4.0",
-    "mlflow>=3.10",          # >=3.10 por CVE-2026-2652
+    "mlflow==3.18.0",  # misma versión que el servidor (docker/mlflow/Dockerfile)
     "shap>=0.46",
     "openpyxl>=3.1",
     "fpdf2>=2.8",
