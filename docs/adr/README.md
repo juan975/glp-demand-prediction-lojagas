@@ -12,6 +12,7 @@ Formato: contexto → decisión → alternativas → consecuencias. Un ADR **no 
 | [0006](0006-delta-lake-sin-dvc.md) | Versionado de datos con Delta Lake, sin DVC | **Propuesto** |
 | [0011](0011-interfaz-contenedor-unico.md) | Interfaz de consulta en un único contenedor, desacoplada por archivos | Aceptado |
 | [0012](0012-acceso-sin-autenticacion-segmentacion.md) | Acceso sin autenticación por segmentación de red, y retiro del SMB | Aceptado |
+| [0013](0013-vistas-documentadas-con-diagrama.md) | Vistas de arquitectura que se documentan con diagrama | Aceptado |
 
 ## Pendientes (ya comprometidos en la tesis)
 

@@ -31,7 +31,7 @@ Este repositorio contiene el código fuente, los artefactos de arquitectura y la
 
 El sistema predice, cada mes y por segmento de negocio, las **toneladas de GLP** que venderá **C.E.M. Lojagas** en el mes siguiente. Combina el histórico de facturación del ERP Odoo con variables territoriales, demográficas y coyunturales de Loja y Zamora Chinchipe: estado vial, población, clima, ciclos agrícolas y eventos como la Romería de la Virgen del Cisne. La predicción anual se obtiene sumando las mensuales.
 
-Se desarrolla bajo **Design Science Research**, con **CRISP-DM** como subproceso de construcción del modelo y el **Modelo de Vistas 4+1** (ISO/IEC/IEEE 42010:2022) para la descripción arquitectónica. Este repositorio es la **Vista de Desarrollo**: cada paquete de `src/lojagas/` corresponde a un contenedor del diagrama de despliegue (`docs/arquitectura/06-vista-despliegue/`).
+Se desarrolla bajo **Design Science Research**, con **CRISP-DM** como subproceso de construcción del modelo y el **Modelo de Vistas 4+1** (ISO/IEC/IEEE 42010:2022) para la descripción arquitectónica. Este repositorio es la **Vista de Desarrollo**: cada paquete de `src/lojagas/` corresponde a un contenedor del diagrama de despliegue (`docs/arquitectura/03-vista-despliegue/`).
 
 ---
 
