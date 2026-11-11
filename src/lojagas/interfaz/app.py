@@ -66,8 +66,9 @@ def salud() -> JSONResponse:
     return JSONResponse(
         {
             "estado": "vivo",
-            "predicciones": lakehouse.ruta_tabla(cfg.lakehouse, "predicciones",
-                                                 TABLA_PREDICCIONES).exists(),
+            "predicciones": lakehouse.ruta_tabla(
+                cfg.lakehouse, "predicciones", TABLA_PREDICCIONES
+            ).exists(),
             "reportes": cfg.reportes.exists(),
         }
     )
