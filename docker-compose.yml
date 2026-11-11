@@ -63,12 +63,12 @@ services:
     volumes:
       # Solo MLflow monta mlruns/: el contenedor ML accede por HTTP (proxy de artefactos)
       - ${LOJAGAS_DATA_ROOT}/mlruns:/mlruns
-    ports:
-      - "127.0.0.1:5000:5000"   # acceso solo por túnel SSH
+    networks:
+      lojagas_net:
+        ipv4_address: 172.30.0.10   # IP fija: destino del túnel SSH del administrador
     depends_on:
       postgres:
         condition: service_healthy
-    networks: [lojagas_net]
     restart: unless-stopped
 
   docker-proxy:
@@ -80,7 +80,7 @@ services:
       POST: 1
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-    networks: [lojagas_net]
+    networks: [proxy_net]
     restart: unless-stopped
 
   airflow-init:
@@ -100,11 +100,12 @@ services:
   airflow-apiserver:
     <<: *airflow-common
     command: api-server
-    ports:
-      - "127.0.0.1:8080:8080"   # acceso solo por túnel SSH
     depends_on:
       airflow-init:
         condition: service_completed_successfully
+    networks:
+      lojagas_net:
+        ipv4_address: 172.30.0.11
     restart: unless-stopped
 
   airflow-scheduler:
@@ -113,6 +114,7 @@ services:
     depends_on:
       airflow-init:
         condition: service_completed_successfully
+    networks: [lojagas_net, proxy_net]
     restart: unless-stopped
 
   airflow-dag-processor:
@@ -169,6 +171,14 @@ services:
 networks:
   lojagas_net:
     name: lojagas_net   # nombre fijo: los DAGs conectan los contenedores aquí
+    ipam:
+      config:
+        - subnet: 172.30.0.0/24
+  proxy_net:
+    # Solo scheduler y proxy. Un puerto publicado es alcanzable desde cualquier
+    # red bridge, así que el proxy nunca publica y vive en una red propia.
+    name: lojagas_proxy_net
+    internal: true
   interfaz_net:
     # Red propia y sin nadie más dentro: el tablero no tiene ruta hacia
     # PostgreSQL, MLflow ni el proxy del socket. El aislamiento no depende de
