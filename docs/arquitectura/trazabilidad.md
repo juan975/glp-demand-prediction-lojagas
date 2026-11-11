@@ -24,13 +24,14 @@ Esta tabla demuestra la correspondencia entre las vistas del 4+1 (ISO/IEC/IEEE 4
 | Orquestación de procesos | Airflow: API Server + Scheduler + DAG Processor | `dags/` | — |
 | _(no aparece en el conceptual)_ | Proxy Docker (HAProxy, TCP 2375) | `docker-compose.yml` → `docker-proxy` | — |
 | _(no aparece en el conceptual)_ | PostgreSQL: `db_airflow`, `db_mlflow` → `pg_data/` | `docker/postgres/init/01-bases.sh` | — |
+| _(verificación de la plataforma)_ | Airflow → contenedor de trabajo | `dags/prueba_humo.py` | `contenedor_lakehouse_mlflow` |
 
 El proxy del socket y PostgreSQL no aparecen en el diagrama conceptual a propósito: son decisiones de despliegue, no capacidades del sistema. Mezclarlas en la vista conceptual la volvería una vista de infraestructura, que es justamente lo que el docente pidió evitar.
 
-## Huecos detectados (ver `docs/inconsistencias.md`)
+## Huecos detectados (issues con la etiqueta `tesis`)
 
 - **I-11 (abierto):** el conceptual promete «monitoreo de desempeño» dentro de la gestión del modelo, y la sección 2.5.2 del Word habla de detección de drift, pero ningún artefacto lo implementa. Hasta que exista, el monitoreo es una lectura manual de las métricas que `generar_reportes.py` deja en la zona de predicciones.
 - **I-30 (resuelto):** Despliegue_v4 ya dibuja API Server, Scheduler y DAG Processor. El *Webserver* no existe en Airflow 3 y el diagrama dejó de nombrarlo.
 - **I-31 (resuelto):** la zona de predicciones aparece ahora en las dos vistas y en el Word.
 - **I-10 (resuelto):** el conceptual v3 incorpora el bloque de gestión del modelo, con registro de experimentos y modelo seleccionado, y el modelado se dibuja como proceso iterativo.
-- **I-36 a I-40 (resueltos):** la interfaz de consulta está en las cuatro vistas, en el despliegue y en el código. El acceso sin autenticación quedó registrado en el ADR-0012 y la sección 1.6 ya declara DSR como metodología y CRISP-DM como subproceso.
+- **I-36 a I-40 (resueltos):** la interfaz de consulta está en la vista lógica, en el despliegue y en el código (las vistas que llevan diagrama, ADR-0013). El acceso sin autenticación quedó registrado en el ADR-0012 y la sección 1.6 ya declara DSR como metodología y CRISP-DM como subproceso.

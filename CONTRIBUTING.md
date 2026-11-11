@@ -6,11 +6,13 @@ Somos dos. Cada línea que llega a `main` la revisó la otra persona. Esto no es
 
 - `main` está protegida: sin push directo, con CI en verde y una aprobación.
 - Ramas cortas desde `main`, de uno a tres días como máximo:
-  - `feat/<issue>-descripcion` para código nuevo
-  - `fix/<issue>-descripcion` para errores
-  - `docs/<issue>-descripcion` para ADRs, model card y trazabilidad
-  - `tesis/<issue>-descripcion` para correcciones que nacen de una inconsistencia del Word
-- Cada PR cierra un issue (`Closes #12`). Sin issue no hay PR.
+  - `feat/descripcion` para código nuevo
+  - `fix/descripcion` para errores
+  - `docs/descripcion` para ADRs, model card y trazabilidad
+  - `tesis/descripcion` para correcciones que nacen de una inconsistencia del Word
+  - `refactor/descripcion` y `test/descripcion` cuando corresponda
+- Cada PR cierra un issue (`Closes #12` en la descripción). Sin issue no hay PR. El número va en el PR, no en el nombre de la rama.
+- Si un PR depende de otro que todavía no se mergea, se abre en borrador con ese otro como base. Al mergear el primero con squash, el segundo se rebasa con `git rebase --onto main <rama-base> <rama>`.
 - Se integra con *squash merge*: un commit por PR en `main`.
 
 ## Commits
@@ -35,7 +37,11 @@ Por contenedor del diagrama de despliegue. El detalle y las reglas para mantener
 3. **Tests con datos sintéticos.** Si un bug solo aparece con datos reales, se reproduce con un fixture sintético.
 4. **Si cambia el diagrama, cambia el código, y viceversa.** El PR actualiza `docs/arquitectura/trazabilidad.md`.
 5. **Decisión no trivial = ADR.** Va en `docs/adr/` antes o junto con el código que la implementa.
-6. **Toda inconsistencia con el Word se registra** en `docs/inconsistencias.md` o como issue con la etiqueta `tesis`.
+6. **Toda inconsistencia con el Word es un issue** con la etiqueta `tesis`. Es el backlog oficial (`docs/inconsistencias.md` explica la convención).
+7. **Nunca se imprimen registros de clientes**, ni para depurar. Lo que imprime un contenedor de trabajo queda en los logs de Airflow y la última línea en su base de datos: PII fuera del Lakehouse.
+8. **Los hooks no se saltan.** Nada de `--no-verify`. Si un hook modifica un archivo, se vuelve a hacer `git add` y se repite el commit.
+9. **Dependencias con `uv add`** en el extra que corresponda, con `pyproject.toml` y `uv.lock` en el mismo commit. Nada de `pip install` dentro del entorno.
+10. **Si cambia `docker-compose.yml`, un Dockerfile o las redes**, el DAG `prueba_humo` tiene que terminar en `success` antes de pedir revisión.
 
 ## Etiquetas de issues
 
