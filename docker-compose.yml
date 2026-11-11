@@ -21,7 +21,7 @@ x-airflow-common: &airflow-common
     AIRFLOW__API_AUTH__JWT_SECRET: ${AIRFLOW_JWT_SECRET}
     AIRFLOW__CORE__EXECUTION_API_SERVER_URL: http://airflow-apiserver:8080/execution/
     AIRFLOW__CORE__AUTH_MANAGER: airflow.providers.fab.auth_manager.fab_auth_manager.FabAuthManager
-    # Variables que leen los DAGs para lanzar los contenedores de trabajo
+    # Servidor: /srv/lojagas. Desarrollo en WSL: /home/<usuario>/lojagas_datos (nunca /mnt/c/)
     LOJAGAS_DATA_ROOT: ${LOJAGAS_DATA_ROOT}
     LOJAGAS_IMAGE_TAG: ${LOJAGAS_IMAGE_TAG}
     LOJAGAS_DOCKER_URL: tcp://docker-proxy:2375
@@ -31,7 +31,7 @@ x-airflow-common: &airflow-common
     ODOO_API_KEY: ${ODOO_API_KEY}
     LOJAGAS_PII_SALT: ${LOJAGAS_PII_SALT}
   volumes:
-    - ${LOJAGAS_REPO_ROOT:-.}/dags:/opt/airflow/dags:ro
+    - ./dags:/opt/airflow/dags:ro
     - airflow_logs:/opt/airflow/logs
   networks: [lojagas_net]
   depends_on:
@@ -91,6 +91,7 @@ services:
       - -c
       - |
         airflow db migrate || exit 1
+        [ -n "$$(ls -A /opt/airflow/dags)" ] || { echo "ERROR: /opt/airflow/dags vacío; revisar LOJAGAS_REPO_ROOT"; exit 1; }
         airflow users create --role Admin \
           --username "${AIRFLOW_ADMIN_USER}" --password "${AIRFLOW_ADMIN_PASSWORD}" \
           --firstname Admin --lastname Lojagas --email admin@lojagas.local \
