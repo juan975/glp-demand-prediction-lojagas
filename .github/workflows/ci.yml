@@ -19,9 +19,9 @@ jobs:
             echo "Hay archivos de datos versionados"; exit 1; fi
           if git ls-files '*.csv' | grep -vE '^(referencias|tests/fixtures)/'; then
             echo "CSV fuera de referencias/ o tests/fixtures/"; exit 1; fi
-      - run: uv sync --extra ingesta --extra procesamiento --extra ml
+      - run: uv sync --locked --extra ingesta --extra procesamiento --extra ml --extra interfaz
       - run: uv run ruff check .
       - run: uv run ruff format --check .
       - run: uv run pytest -m "not integracion" --cov --cov-report=term-missing
       - name: Sintaxis de DAGs
-        run: python -m py_compile dags/*.py
+        run: uv run python -m py_compile dags/*.py
