@@ -2,7 +2,7 @@
 
 ## Principio: cortar por contenedor, acordar en los contratos
 
-El reparto sigue las fronteras de Despliegue_v4. Cada contenedor se comunica con el siguiente **solo a través de una tabla del Lakehouse**. Si los dos acuerdan primero el esquema de esas tablas, cada quien avanza sin esperar al otro.
+El reparto sigue las fronteras del diagrama de despliegue. Cada contenedor se comunica con el siguiente **solo a través de una tabla del Lakehouse**. Si los dos acuerdan primero el esquema de esas tablas, cada quien avanza sin esperar al otro.
 
 ```
    Dara (datos de entrada)          Juan (plataforma)         Dara + Juan (modelado)

@@ -1,8 +1,8 @@
 # Trazabilidad arquitectura ↔ código
 
-Esta tabla demuestra la correspondencia entre las vistas del 4+1 (ISO/IEC/IEEE 42010). Los nombres de archivo de **Despliegue_v4** existen literalmente en el código. Si una fila queda sin código o un archivo queda sin fila, hay una inconsistencia que se corrige en el mismo PR.
+Esta tabla demuestra la correspondencia entre las vistas del 4+1 (ISO/IEC/IEEE 42010). Los nombres de archivo del **diagrama de despliegue** existen literalmente en el código. Si una fila queda sin código o un archivo queda sin fila, hay una inconsistencia que se corrige en el mismo PR.
 
-| Conceptual (DiseñoArquitectónico_v3) | Contenedor (Despliegue_v4) | Artefacto del diagrama → código | Tarea del DAG |
+| Conceptual (diseño arquitectónico) | Contenedor (diagrama de despliegue) | Artefacto del diagrama → código | Tarea del DAG |
 |---|---|---|---|
 | Ingesta e integración de datos | Ingesta | `ingesta.py` → `src/lojagas/ingesta/ingesta.py` (+ `odoo_api.py`, `externas/`) | `ingesta_odoo`, `ingesta_externas` |
 | Lakehouse: zona cruda | `Data Lakehouse/Zona Raw/` | `comun/lakehouse.py` | — |

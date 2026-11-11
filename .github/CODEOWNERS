@@ -1,4 +1,4 @@
-# Responsable principal por contenedor de Despliegue_v4. La otra persona revisa.
+# Responsable principal por contenedor del diagrama de despliegue. La otra persona revisa.
 # Plataforma + Procesamiento → juan975 | Ingesta + ML → daravan1
 
 /docker/                          @juan975

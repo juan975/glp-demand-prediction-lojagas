@@ -1,6 +1,6 @@
 """Entrypoint `lojagas <subcomando>`. Es lo único que Airflow invoca en los contenedores.
 
-Cada subcomando corresponde a un artefacto de Despliegue_v4:
+Cada subcomando corresponde a un artefacto del diagrama de despliegue:
     Contenedor Ingesta        → ingesta-odoo, ingesta-externas   (ingesta.py)
     Contenedor Procesamiento  → curacion                         (curacion.py)
                               → ingenieria-caracteristicas       (ingenieria_caracteristicas.py)

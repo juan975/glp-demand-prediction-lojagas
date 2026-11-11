@@ -26,7 +26,7 @@ test(walk-forward): caso de un solo segmento
 
 ## Reparto
 
-Por contenedor de Despliegue_v4. El detalle y las reglas para mantenerlo dinámico están en [`docs/plan_inicial.md`](docs/plan_inicial.md); los dueños por carpeta, en `.github/CODEOWNERS`.
+Por contenedor del diagrama de despliegue. El detalle y las reglas para mantenerlo dinámico están en [`docs/plan_inicial.md`](docs/plan_inicial.md); los dueños por carpeta, en `.github/CODEOWNERS`.
 
 ## Reglas que no se negocian
 

@@ -1,4 +1,4 @@
-"""«Contenedor Interfaz» (Despliegue_v4).
+"""«Contenedor Interfaz» (diagrama de despliegue).
 
 Único contenedor persistente de los cuatro aplicativos: los de ingesta, procesamiento
 y ML son efímeros y los levanta Airflow en cada ejecución, mientras que este queda

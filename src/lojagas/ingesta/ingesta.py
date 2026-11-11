@@ -1,4 +1,4 @@
-"""ingesta.py — artefacto del «Contenedor Ingesta» (Despliegue_v4).
+"""ingesta.py — artefacto del «Contenedor Ingesta» (diagrama de despliegue).
 
 Extrae de ERP Odoo (API) y Fuentes Externas (HTTPS 443) y escribe en la zona Raw
 tal cual llega, con metadatos de extracción. No limpia ni anonimiza: eso es
@@ -28,9 +28,9 @@ def _con_metadatos(df: pd.DataFrame, fuente: str, periodo: str) -> pd.DataFrame:
 def ejecutar_odoo(cfg: Config, periodo: str) -> int:
     inicio = date.fromisoformat(periodo)
     fin = (pd.Timestamp(inicio) + pd.offsets.MonthEnd(0)).date()
-    df = odoo_api.extraer_facturas(cfg, inicio, fin)
+    facturas = odoo_api.extraer_facturas(cfg, inicio, fin)
     return lakehouse.escribir(
-        _con_metadatos(df, "odoo", periodo),
+        _con_metadatos(facturas, "odoo", periodo),
         cfg.lakehouse,
         "raw",
         "ventas_lineas",
@@ -41,9 +41,9 @@ def ejecutar_odoo(cfg: Config, periodo: str) -> int:
 def ejecutar_externas(cfg: Config, periodo: str) -> dict[str, int]:
     versiones = {}
     for fuente in (CalendarioEventos(),):  # agregar INAMHI, Petroecuador... al implementarlas
-        df = fuente.extraer(periodo)
+        datos = fuente.extraer(periodo)
         versiones[fuente.nombre] = lakehouse.escribir(
-            _con_metadatos(df, fuente.nombre, periodo),
+            _con_metadatos(datos, fuente.nombre, periodo),
             cfg.lakehouse,
             "raw",
             fuente.nombre,

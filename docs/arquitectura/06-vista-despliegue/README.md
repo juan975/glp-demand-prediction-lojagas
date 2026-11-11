@@ -1,6 +1,6 @@
 # Vista de Despliegue
 
-![Diagrama de despliegue](Despliegue_v4.png)
+![Diagrama de despliegue](diagrama_despliegue.png)
 
 Todo el sistema vive en **un único servidor on-premise de Lojagas**. Sobre él corre un Docker Engine con ocho contenedores, un Data Lakehouse en disco y los directorios que el pipeline usa para trabajar. La decisión de no usar nube está en el [ADR-0001](../../adr/0001-on-premise.md) y se sostiene en los artículos 55 a 59 de la LOPDP: el dataset contiene cédulas, RUC, nombres, direcciones y coordenadas, y sacarlo del país abriría un trámite de transferencia internacional que este proyecto no necesita.
 

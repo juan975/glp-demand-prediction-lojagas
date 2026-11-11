@@ -1,4 +1,4 @@
-"""«Contenedor Procesamiento» — Módulo Tratamiento Datos (Despliegue_v4).
+"""«Contenedor Procesamiento» — Módulo Tratamiento Datos (diagrama de despliegue).
 
 - curacion.py: Raw → Curated (contrato → seudonimización → agregación → contrato).
 - ingenieria_caracteristicas.py: Curated → Feature.
