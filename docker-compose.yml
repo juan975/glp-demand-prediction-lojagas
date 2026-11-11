@@ -90,10 +90,11 @@ services:
       - bash
       - -c
       - |
-        airflow db migrate &&
+        airflow db migrate || exit 1
         airflow users create --role Admin \
           --username "${AIRFLOW_ADMIN_USER}" --password "${AIRFLOW_ADMIN_PASSWORD}" \
-          --firstname Admin --lastname Lojagas --email admin@lojagas.local || true
+          --firstname Admin --lastname Lojagas --email admin@lojagas.local \
+          || echo "Aviso: no se creó el usuario (¿ya existe?)"
     restart: "no"
 
   airflow-apiserver:
@@ -161,7 +162,7 @@ services:
     ports:
       # Atado a la IP interna del servidor, nunca a 0.0.0.0 (ADR-0012).
       # El cortafuegos restringe además el origen a la subred de planificación.
-      - "${LOJAGAS_LAN_IP}:${LOJAGAS_INTERFAZ_PUERTO:-8000}:8000"
+      - "${LOJAGAS_LAN_IP:?definir LOJAGAS_LAN_IP en .env}:${LOJAGAS_INTERFAZ_PUERTO:-8000}:8000"
     networks: [interfaz_net]
     restart: unless-stopped
 
