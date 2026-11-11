@@ -15,13 +15,12 @@ x-airflow-common: &airflow-common
   environment: &airflow-env
     AIRFLOW__CORE__EXECUTOR: LocalExecutor
     AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:${AIRFLOW_DB_PASSWORD}@postgres:5432/db_airflow
-    AIRFLOW__CORE__FERNET_KEY: ${AIRFLOW_FERNET_KEY}
+    AIRFLOW__CORE__FERNET_KEY: ${AIRFLOW_FERNET_KEY:?generar AIRFLOW_FERNET_KEY (ver .env.example)}
+    AIRFLOW__API_AUTH__JWT_SECRET: ${AIRFLOW_JWT_SECRET:?generar AIRFLOW_JWT_SECRET (ver .env.example)}
     AIRFLOW__CORE__LOAD_EXAMPLES: "false"
     AIRFLOW__CORE__DEFAULT_TIMEZONE: America/Guayaquil
-    AIRFLOW__API_AUTH__JWT_SECRET: ${AIRFLOW_JWT_SECRET}
     AIRFLOW__CORE__EXECUTION_API_SERVER_URL: http://airflow-apiserver:8080/execution/
     AIRFLOW__CORE__AUTH_MANAGER: airflow.providers.fab.auth_manager.fab_auth_manager.FabAuthManager
-    # Servidor: /srv/lojagas. Desarrollo en WSL: /home/<usuario>/lojagas_datos (nunca /mnt/c/)
     LOJAGAS_DATA_ROOT: ${LOJAGAS_DATA_ROOT}
     LOJAGAS_IMAGE_TAG: ${LOJAGAS_IMAGE_TAG}
     LOJAGAS_DOCKER_URL: tcp://docker-proxy:2375
@@ -29,7 +28,7 @@ x-airflow-common: &airflow-common
     ODOO_URL: ${ODOO_URL}
     ODOO_DB: ${ODOO_DB}
     ODOO_API_KEY: ${ODOO_API_KEY}
-    LOJAGAS_PII_SALT: ${LOJAGAS_PII_SALT}
+    LOJAGAS_PII_SALT: ${LOJAGAS_PII_SALT:?generar LOJAGAS_PII_SALT antes de cualquier ingesta}
   volumes:
     - ./dags:/opt/airflow/dags:ro
     - airflow_logs:/opt/airflow/logs
@@ -91,7 +90,7 @@ services:
       - -c
       - |
         airflow db migrate || exit 1
-        [ -n "$$(ls -A /opt/airflow/dags)" ] || { echo "ERROR: /opt/airflow/dags vacío; revisar LOJAGAS_REPO_ROOT"; exit 1; }
+        [ -n "$$(ls -A /opt/airflow/dags)" ] || { echo "ERROR: /opt/airflow/dags vacio; revisar el bind mount ./dags"; exit 1; }
         airflow users create --role Admin \
           --username "${AIRFLOW_ADMIN_USER}" --password "${AIRFLOW_ADMIN_PASSWORD}" \
           --firstname Admin --lastname Lojagas --email admin@lojagas.local \
