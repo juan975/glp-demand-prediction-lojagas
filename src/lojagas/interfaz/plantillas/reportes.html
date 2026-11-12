@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block contenido %}
+  <h2>Reportes disponibles</h2>
+  {% if not archivos %}
+    <p class="aviso">Todavía no se ha generado ningún reporte.</p>
+  {% else %}
+    <table>
+      <thead><tr><th>Período</th><th>Archivo</th><th>Tamaño</th></tr></thead>
+      <tbody>
+      {% for a in archivos %}
+        <tr><td>{{ a.periodo }}</td><td>{{ a.nombre }}</td><td>{{ a.tamano }}</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+{% endblock %}

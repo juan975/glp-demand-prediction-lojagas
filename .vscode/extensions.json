@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "ms-vscode-remote.remote-wsl",
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "charliermarsh.ruff",
+    "ms-toolsai.jupyter",
+    "ms-azuretools.vscode-containers",
+    "github.vscode-pull-request-github",
+    "tamasfe.even-better-toml"
+  ]
+}

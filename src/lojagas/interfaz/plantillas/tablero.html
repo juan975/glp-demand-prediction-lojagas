@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block contenido %}
+  {% if metricas %}
+    <p>Modelo vigente {{ metricas.version_modelo }}, entrenado el
+       {{ metricas.fecha_entrenamiento }}. MAPE de validación: {{ metricas.mape }}%.</p>
+  {% else %}
+    <p class="aviso">No hay métricas del modelo vigente para este período.</p>
+  {% endif %}
+
+  <h2>Demanda estimada por segmento</h2>
+  {% if predicciones is none or predicciones.empty %}
+    <p class="aviso">Todavía no hay predicciones publicadas.</p>
+  {% else %}
+    <table>
+      <thead><tr><th>Período</th><th>Segmento</th><th>Predicho</th><th>Observado</th></tr></thead>
+      <tbody>
+      {% for fila in predicciones.itertuples() %}
+        <tr>
+          <td>{{ fila.periodo }}</td>
+          <td>{{ fila.segmento }}</td>
+          <td>{{ fila.cantidad_predicha }}</td>
+          <td>{{ fila.cantidad_observada if fila.cantidad_observada else "—" }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+{% endblock %}

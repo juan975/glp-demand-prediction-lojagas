@@ -10,6 +10,8 @@ Formato: contexto → decisión → alternativas → consecuencias. Un ADR **no 
 | [0004](0004-mlflow-proxy-artefactos.md) | MLflow como proxy de artefactos | Aceptado |
 | [0005](0005-ingesta-odoo-api.md) | Ingesta de Odoo por API | **Propuesto**: falta versión de Odoo |
 | [0006](0006-delta-lake-sin-dvc.md) | Versionado de datos con Delta Lake, sin DVC | **Propuesto** |
+| [0011](0011-interfaz-contenedor-unico.md) | Interfaz de consulta en un único contenedor, desacoplada por archivos | Aceptado |
+| [0012](0012-acceso-sin-autenticacion-segmentacion.md) | Acceso sin autenticación por segmentación de red, y retiro del SMB | Aceptado |
 
 ## Pendientes (ya comprometidos en la tesis)
 

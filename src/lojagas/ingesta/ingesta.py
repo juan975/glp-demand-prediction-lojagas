@@ -1,4 +1,4 @@
-"""ingesta.py — artefacto del «Contenedor Ingesta» (Despliegue_v3).
+"""ingesta.py — artefacto del «Contenedor Ingesta» (Despliegue_v4).
 
 Extrae de ERP Odoo (API) y Fuentes Externas (HTTPS 443) y escribe en la zona Raw
 tal cual llega, con metadatos de extracción. No limpia ni anonimiza: eso es

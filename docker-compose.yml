@@ -1,5 +1,5 @@
-# Despliegue_v3 — un nodo on-premise (Lojagas), Docker Engine, Docker Compose.
-# Contenedores de larga duración: postgres, mlflow, airflow-*, docker-proxy.
+# Despliegue_v4 — un nodo on-premise (Lojagas), Docker Engine, Docker Compose.
+# Contenedores de larga duración: postgres, mlflow, airflow-*, docker-proxy, interfaz.
 # Contenedores de trabajo efímeros (profile "jobs"): ingesta, procesamiento y ml. No corren solos:
 # los lanza Airflow con DockerOperator a través del proxy del socket.
 
@@ -144,9 +144,35 @@ services:
       dockerfile: docker/ml/Dockerfile
     image: lojagas/ml:${LOJAGAS_IMAGE_TAG}
 
+  # --- Tablero de consulta: único aplicativo permanente (ADR-0011) ---
+  interfaz:
+    build:
+      context: .
+      dockerfile: docker/interfaz/Dockerfile
+    image: lojagas/interfaz:${LOJAGAS_IMAGE_TAG}
+    environment:
+      LOJAGAS_LAKEHOUSE: /data/lakehouse
+      LOJAGAS_REPORTES: /data/reportes
+    volumes:
+      # Solo la zona de predicciones y los reportes, y en solo lectura.
+      # Raw, Curated y Feature contienen PII y este contenedor no las monta.
+      - ${LOJAGAS_DATA_ROOT}/lakehouse/predicciones:/data/lakehouse/predicciones:ro
+      - ${LOJAGAS_DATA_ROOT}/reportes:/data/reportes:ro
+    ports:
+      # Atado a la IP interna del servidor, nunca a 0.0.0.0 (ADR-0012).
+      # El cortafuegos restringe además el origen a la subred de planificación.
+      - "${LOJAGAS_LAN_IP}:${LOJAGAS_INTERFAZ_PUERTO:-8000}:8000"
+    networks: [interfaz_net]
+    restart: unless-stopped
+
 networks:
   lojagas_net:
     name: lojagas_net   # nombre fijo: los DAGs conectan los contenedores aquí
+  interfaz_net:
+    # Red propia y sin nadie más dentro: el tablero no tiene ruta hacia
+    # PostgreSQL, MLflow ni el proxy del socket. El aislamiento no depende de
+    # configurarlo bien, depende de que no tenga a dónde ir.
+    name: lojagas_interfaz_net
 
 volumes:
   airflow_logs:
