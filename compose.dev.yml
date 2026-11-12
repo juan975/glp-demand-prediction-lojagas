@@ -1,0 +1,7 @@
+# SOLO DESARROLLO (Docker Desktop). Publicar estos puertos los vuelve alcanzables
+# desde otras redes bridge, incluida la de la interfaz. Nunca usar en el servidor.
+services:
+  mlflow:
+    ports: ["127.0.0.1:5000:5000"]
+  airflow-apiserver:
+    ports: ["127.0.0.1:8080:8080"]

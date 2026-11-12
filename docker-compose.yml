@@ -15,13 +15,12 @@ x-airflow-common: &airflow-common
   environment: &airflow-env
     AIRFLOW__CORE__EXECUTOR: LocalExecutor
     AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:${AIRFLOW_DB_PASSWORD}@postgres:5432/db_airflow
-    AIRFLOW__CORE__FERNET_KEY: ${AIRFLOW_FERNET_KEY}
+    AIRFLOW__CORE__FERNET_KEY: ${AIRFLOW_FERNET_KEY:?generar AIRFLOW_FERNET_KEY (ver .env.example)}
+    AIRFLOW__API_AUTH__JWT_SECRET: ${AIRFLOW_JWT_SECRET:?generar AIRFLOW_JWT_SECRET (ver .env.example)}
     AIRFLOW__CORE__LOAD_EXAMPLES: "false"
     AIRFLOW__CORE__DEFAULT_TIMEZONE: America/Guayaquil
-    AIRFLOW__API_AUTH__JWT_SECRET: ${AIRFLOW_JWT_SECRET}
     AIRFLOW__CORE__EXECUTION_API_SERVER_URL: http://airflow-apiserver:8080/execution/
     AIRFLOW__CORE__AUTH_MANAGER: airflow.providers.fab.auth_manager.fab_auth_manager.FabAuthManager
-    # Variables que leen los DAGs para lanzar los contenedores de trabajo
     LOJAGAS_DATA_ROOT: ${LOJAGAS_DATA_ROOT}
     LOJAGAS_IMAGE_TAG: ${LOJAGAS_IMAGE_TAG}
     LOJAGAS_DOCKER_URL: tcp://docker-proxy:2375
@@ -29,9 +28,9 @@ x-airflow-common: &airflow-common
     ODOO_URL: ${ODOO_URL}
     ODOO_DB: ${ODOO_DB}
     ODOO_API_KEY: ${ODOO_API_KEY}
-    LOJAGAS_PII_SALT: ${LOJAGAS_PII_SALT}
+    LOJAGAS_PII_SALT: ${LOJAGAS_PII_SALT:?generar LOJAGAS_PII_SALT antes de cualquier ingesta}
   volumes:
-    - ${LOJAGAS_REPO_ROOT:-.}/dags:/opt/airflow/dags:ro
+    - ./dags:/opt/airflow/dags:ro
     - airflow_logs:/opt/airflow/logs
   networks: [lojagas_net]
   depends_on:
@@ -64,12 +63,12 @@ services:
     volumes:
       # Solo MLflow monta mlruns/: el contenedor ML accede por HTTP (proxy de artefactos)
       - ${LOJAGAS_DATA_ROOT}/mlruns:/mlruns
-    ports:
-      - "127.0.0.1:5000:5000"   # acceso solo por túnel SSH
+    networks:
+      lojagas_net:
+        ipv4_address: 172.30.0.10   # IP fija: destino del túnel SSH del administrador
     depends_on:
       postgres:
         condition: service_healthy
-    networks: [lojagas_net]
     restart: unless-stopped
 
   docker-proxy:
@@ -81,7 +80,7 @@ services:
       POST: 1
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-    networks: [lojagas_net]
+    networks: [proxy_net]
     restart: unless-stopped
 
   airflow-init:
@@ -90,20 +89,23 @@ services:
       - bash
       - -c
       - |
-        airflow db migrate &&
+        airflow db migrate || exit 1
+        [ -n "$$(ls -A /opt/airflow/dags)" ] || { echo "ERROR: /opt/airflow/dags vacio; revisar el bind mount ./dags"; exit 1; }
         airflow users create --role Admin \
           --username "${AIRFLOW_ADMIN_USER}" --password "${AIRFLOW_ADMIN_PASSWORD}" \
-          --firstname Admin --lastname Lojagas --email admin@lojagas.local || true
+          --firstname Admin --lastname Lojagas --email admin@lojagas.local \
+          || echo "Aviso: no se creó el usuario (¿ya existe?)"
     restart: "no"
 
   airflow-apiserver:
     <<: *airflow-common
     command: api-server
-    ports:
-      - "127.0.0.1:8080:8080"   # acceso solo por túnel SSH
     depends_on:
       airflow-init:
         condition: service_completed_successfully
+    networks:
+      lojagas_net:
+        ipv4_address: 172.30.0.11
     restart: unless-stopped
 
   airflow-scheduler:
@@ -112,6 +114,7 @@ services:
     depends_on:
       airflow-init:
         condition: service_completed_successfully
+    networks: [lojagas_net, proxy_net]
     restart: unless-stopped
 
   airflow-dag-processor:
@@ -161,13 +164,21 @@ services:
     ports:
       # Atado a la IP interna del servidor, nunca a 0.0.0.0 (ADR-0012).
       # El cortafuegos restringe además el origen a la subred de planificación.
-      - "${LOJAGAS_LAN_IP}:${LOJAGAS_INTERFAZ_PUERTO:-8000}:8000"
+      - "${LOJAGAS_LAN_IP:?definir LOJAGAS_LAN_IP en .env}:${LOJAGAS_INTERFAZ_PUERTO:-8000}:8000"
     networks: [interfaz_net]
     restart: unless-stopped
 
 networks:
   lojagas_net:
     name: lojagas_net   # nombre fijo: los DAGs conectan los contenedores aquí
+    ipam:
+      config:
+        - subnet: 172.30.0.0/24
+  proxy_net:
+    # Solo scheduler y proxy. Un puerto publicado es alcanzable desde cualquier
+    # red bridge, así que el proxy nunca publica y vive en una red propia.
+    name: lojagas_proxy_net
+    internal: true
   interfaz_net:
     # Red propia y sin nadie más dentro: el tablero no tiene ruta hacia
     # PostgreSQL, MLflow ni el proxy del socket. El aislamiento no depende de
