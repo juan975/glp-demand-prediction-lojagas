@@ -1,4 +1,4 @@
-"""«Contenedor ML» (Despliegue_v4).
+"""«Contenedor ML» (diagrama de despliegue).
 
 - pipeline_entrenamiento.py → MLflow Tracking (HTTP 5000)
 - evaluacion.py             → selección del candidato y SHAP; Model Registry

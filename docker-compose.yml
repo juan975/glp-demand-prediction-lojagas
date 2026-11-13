@@ -1,4 +1,4 @@
-# Despliegue_v4 — un nodo on-premise (Lojagas), Docker Engine, Docker Compose.
+# Diagrama de despliegue — un nodo on-premise (Lojagas), Docker Engine, Docker Compose.
 # Contenedores de larga duración: postgres, mlflow, airflow-*, docker-proxy, interfaz.
 # Contenedores de trabajo efímeros (profile "jobs"): ingesta, procesamiento y ml. No corren solos:
 # los lanza Airflow con DockerOperator a través del proxy del socket.

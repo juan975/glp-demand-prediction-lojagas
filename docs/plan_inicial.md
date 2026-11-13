@@ -2,7 +2,7 @@
 
 ## Principio: cortar por contenedor, acordar en los contratos
 
-El reparto sigue las fronteras de Despliegue_v4. Cada contenedor se comunica con el siguiente **solo a través de una tabla del Lakehouse**. Si los dos acuerdan primero el esquema de esas tablas, cada quien avanza sin esperar al otro.
+El reparto sigue las fronteras del diagrama de despliegue. Cada contenedor se comunica con el siguiente **solo a través de una tabla del Lakehouse**. Si los dos acuerdan primero el esquema de esas tablas, cada quien avanza sin esperar al otro.
 
 ```
    Dara (datos de entrada)          Juan (plataforma)         Dara + Juan (modelado)
@@ -34,13 +34,13 @@ La **interfaz de consulta** (`src/lojagas/interfaz/`, `docker/interfaz/`) todav�
 
 ## Semana 1: base común (juntos)
 
-| Tarea | Quién | Hecho cuando |
-|---|---|---|
-| Colaboradora invitada, reglas de rama, `bootstrap_github.py --aplicar` | Juan | Issues creados, CI en verde |
-| Entorno instalado según `docs/entorno.md` | Ambos | `uv run pytest` en verde en las dos máquinas |
-| `docker compose up` local: Airflow y MLflow responden | Juan | Captura de ambas UIs |
-| Sesión del contrato `feature.demanda_mensual` | Ambos | Esquema en `contratos.py` |
-| Reunión con Lojagas: versión de Odoo y regla de segmentos | Ambos | ADR-0005 decidido; `mapa_segmentos.csv` completo |
+| Tarea | Quién | Hecho cuando | Estado (11 nov) |
+|---|---|---|---|
+| Colaboradora invitada, reglas de rama, `bootstrap_github.py --aplicar` | Juan | Issues creados, CI en verde | Issues creados; falta verificar la protección de `main` |
+| Entorno instalado según `docs/entorno.md` | Ambos | `uv run pytest` en verde en las dos máquinas | Juan listo; Dara después del merge de #33 y #34 |
+| `docker compose up` local: Airflow y MLflow responden | Juan | Captura de ambas UIs | Prueba de humo aprobada (ADR-0015); **faltan las capturas** |
+| Sesión del contrato `feature.demanda_mensual` | Ambos | Esquema en `contratos.py` | Pendiente |
+| Reunión con Lojagas: versión de Odoo, regla de segmentos y fecha límite de pedido | Ambos | ADR-0005 y ADR-0014 decididos; `mapa_segmentos.csv` completo | Pendiente |
 
 ## Semanas 2–3: en paralelo
 

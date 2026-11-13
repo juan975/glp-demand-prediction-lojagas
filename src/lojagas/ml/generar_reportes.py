@@ -20,7 +20,7 @@ segmento y por mes**. Nada a nivel de cliente: el tablero no exige autenticació
 decisión (ADR-0012) solo se sostiene mientras esta condición se cumpla.
 
 Vive en el contenedor de ML aun cuando no usa el modelo. El porqué, y el costo que eso
-tiene, están en `docs/arquitectura/06-vista-despliegue/README.md`.
+tiene, están en `docs/arquitectura/03-vista-despliegue/README.md`.
 """
 
 from __future__ import annotations

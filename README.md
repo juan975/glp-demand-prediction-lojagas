@@ -31,7 +31,7 @@ Este repositorio contiene el código fuente, los artefactos de arquitectura y la
 
 El sistema predice, cada mes y por segmento de negocio, las **toneladas de GLP** que venderá **C.E.M. Lojagas** en el mes siguiente. Combina el histórico de facturación del ERP Odoo con variables territoriales, demográficas y coyunturales de Loja y Zamora Chinchipe: estado vial, población, clima, ciclos agrícolas y eventos como la Romería de la Virgen del Cisne. La predicción anual se obtiene sumando las mensuales.
 
-Se desarrolla bajo **Design Science Research**, con **CRISP-DM** como subproceso de construcción del modelo y el **Modelo de Vistas 4+1** (ISO/IEC/IEEE 42010:2022) para la descripción arquitectónica. Este repositorio es la **Vista de Desarrollo**: cada paquete de `src/lojagas/` corresponde a un contenedor del diagrama de despliegue (`docs/arquitectura/06-vista-despliegue/`).
+Se desarrolla bajo **Design Science Research**, con **CRISP-DM** como subproceso de construcción del modelo y el **Modelo de Vistas 4+1** (ISO/IEC/IEEE 42010:2022) para la descripción arquitectónica. Por indicación del director, solo la vista lógica y la de despliegue llevan diagrama ([ADR-0013](docs/adr/0013-vistas-documentadas-con-diagrama.md)). La Vista de Desarrollo es este repositorio: cada paquete de `src/lojagas/` corresponde a un contenedor del diagrama de despliegue (`docs/arquitectura/03-vista-despliegue/`).
 
 ---
 
@@ -44,16 +44,19 @@ Se desarrolla bajo **Design Science Research**, con **CRISP-DM** como subproceso
 │   ├── procesamiento/    «Contenedor Procesamiento»: curacion.py, ingenieria_caracteristicas.py
 │   ├── ml/               «Contenedor ML»: pipeline_entrenamiento.py, evaluacion.py,
 │   │                      predictor.py, generar_reportes.py, modelos/
+│   ├── interfaz/         «Contenedor Interfaz»: tablero de consulta de solo lectura
 │   └── cli.py            `lojagas <subcomando>`: lo que lanza Airflow en cada contenedor
-├── dags/                 DAGs de Airflow (prediccion_mensual, reentrenamiento)
+├── dags/                 DAGs de Airflow (prediccion_mensual, reentrenamiento, prueba_humo)
 ├── docker/               un Dockerfile por contenedor + init de PostgreSQL
 ├── referencias/          datos públicos o de definición propia (calendario, mapa de segmentos)
 ├── tests/                solo datos sintéticos
 ├── notebooks/            EDA; nunca código de producción
 └── docs/
-    ├── arquitectura/     01-mapa-capacidades … 10-testing, trazabilidad.md
+    ├── arquitectura/     01-mapa-capacidades, 02-vista-logica, 03-vista-despliegue,
+    │                      04 a 07 (datos, protección, seguridad, pruebas), trazabilidad.md
     ├── adr/              decisiones de arquitectura
-    ├── inconsistencias.md   backlog de correcciones del Word y los diagramas
+    ├── entorno.md        instalación del entorno de desarrollo
+    ├── inconsistencias.md   cómo se usa el backlog (issues con la etiqueta `tesis`)
     ├── model_card.md     ISO/IEC 23053
     └── registro_riesgos.md  ISO/IEC 23894
 ```
@@ -64,19 +67,17 @@ Los datos **no viven en el repositorio**. El Lakehouse, `mlruns/`, `pg_data/` y 
 
 ## Empezar
 
-```bash
-uv sync --all-extras          # entorno completo (Python 3.11)
-uv run pre-commit install     # bloquea datos y secretos antes de cada commit
-uv run pytest                 # tests con datos sintéticos
-```
-
-Plataforma completa (requiere Docker):
+La instalación completa, paso a paso, está en [`docs/entorno.md`](docs/entorno.md). En resumen:
 
 ```bash
-cp .env.example .env && make dirs && make build && docker compose up -d
+uv sync --extra ingesta --extra procesamiento --extra ml --extra interfaz   # no usar --all-extras
+uv run pre-commit install
+uv run pytest
 ```
 
-La configuración del equipo de cada integrante está en [`docs/entorno.md`](docs/entorno.md). Las reglas de trabajo están en [`CONTRIBUTING.md`](CONTRIBUTING.md).
+La plataforma (Docker) necesita antes un `.env` con los secretos generados: el compose no arranca sin ellos. En desarrollo se usa además `compose.dev.yml` para abrir MLflow y Airflow en el navegador; en el servidor se entra por túnel SSH ([ADR-0015](docs/adr/0015-segmentacion-red.md)). Para comprobar que todo funciona, el DAG `prueba_humo` tiene que terminar en `success`.
+
+Las reglas de trabajo están en [`CONTRIBUTING.md`](CONTRIBUTING.md) y el backlog, en los issues con la etiqueta `tesis`.
 
 ---
 

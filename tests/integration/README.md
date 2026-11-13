@@ -1,6 +1,6 @@
 # Tests de integración
 
-Requieren `docker compose up -d` (PostgreSQL y MLflow). Se marcan con `@pytest.mark.integracion` y se corren con:
+Requieren `docker compose up -d` (PostgreSQL y MLflow) **con `compose.dev.yml`**: sin él, MLflow no publica su puerto y los tests no llegan desde el host (ADR-0015). Se marcan con `@pytest.mark.integracion` y se corren con:
 
 ```bash
 uv run pytest -m integracion

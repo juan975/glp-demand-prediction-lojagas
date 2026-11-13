@@ -1,8 +1,8 @@
 # Vista de Despliegue
 
-![Diagrama de despliegue](Despliegue_v4.png)
+![Diagrama de despliegue](diagrama_despliegue.png)
 
-Todo el sistema vive en **un único servidor on-premise de Lojagas**. Sobre él corre un Docker Engine con ocho contenedores, un Data Lakehouse en disco y los directorios que el pipeline usa para trabajar. La decisión de no usar nube está en el [ADR-0001](../../adr/0001-on-premise.md) y se sostiene en los artículos 55 a 59 de la LOPDP: el dataset contiene cédulas, RUC, nombres, direcciones y coordenadas, y sacarlo del país abriría un trámite de transferencia internacional que este proyecto no necesita.
+Todo el sistema vive en **un único servidor on-premise de Lojagas**. Sobre él corre un Docker Engine con ocho contenedores lógicos (once reales, ver más abajo), un Data Lakehouse en disco y los directorios que el pipeline usa para trabajar. La decisión de no usar nube está en el [ADR-0001](../../adr/0001-on-premise.md) y se sostiene en los artículos 55 a 59 de la LOPDP: el dataset contiene cédulas, RUC, nombres, direcciones y coordenadas, y sacarlo del país abriría un trámite de transferencia internacional que este proyecto no necesita.
 
 ## Los ocho contenedores
 
@@ -11,7 +11,7 @@ Cuatro son de plataforma y están siempre encendidos:
 | Contenedor | Qué hace |
 |---|---|
 | Docker Socket Proxy | Expone al socket de Docker solo las operaciones que DockerOperator necesita, para que Airflow no lo monte directo. [ADR-0002](../../adr/0002-docker-compose-dockeroperator-proxy.md) |
-| Airflow | API Server, Scheduler y DAG Processor. En Airflow 3 el *Webserver* ya no existe |
+| Airflow | API Server, Scheduler y DAG Processor, cada uno en su propio contenedor, más `airflow-init`, que migra la base y termina. El diagrama los agrupa en un solo nodo para que no se vuelva ilegible. En Airflow 3 el *Webserver* ya no existe |
 | PostgreSQL | Motor único con `db_airflow` y `db_mlflow`. [ADR-0003](../../adr/0003-postgresql-unico-motor.md) |
 | MLflow | Tracking y Model Registry, con proxy de artefactos. [ADR-0004](../../adr/0004-mlflow-proxy-artefactos.md) |
 
@@ -43,9 +43,19 @@ Hay tres caminos y cada uno llega a un sitio distinto.
 
 La carpeta compartida por SMB que antes cumplía esa función **se retiró** al incorporarse la interfaz ([ADR-0012](../../adr/0012-acceso-sin-autenticacion-segmentacion.md)). Mantener las dos habría dejado dos vías de entrega equivalentes y permisos de red sobre un directorio que ya nadie necesita. El precio es que si el contenedor de la interfaz se cae, planificación se queda sin acceso hasta que se levante; el administrador puede entregar los archivos por otra vía mientras tanto, porque `reportes/` sigue en el servidor.
 
-**El administrador** entra por SSH en el puerto 22. Desde ahí opera el servidor y llega por túnel a las interfaces de Airflow y de MLflow, que publican su puerto únicamente en `127.0.0.1` y por tanto no son alcanzables desde la red. Es a propósito: son las dos consolas que pueden lanzar procesos y promover modelos.
+**El administrador** entra por SSH en el puerto 22. Desde ahí opera el servidor y llega por túnel a las interfaces de Airflow y de MLflow, que **no publican ningún puerto**: el túnel apunta a su IP fija en la red interna de Docker (`ssh -L 5000:172.30.0.10:5000 -L 8080:172.30.0.11:8080`). Es a propósito: son las dos consolas que pueden lanzar procesos y promover modelos. Publicarlas aunque sea en `127.0.0.1` las vuelve alcanzables desde las otras redes de Docker; eso se comprobó en la prueba de humo ([ADR-0015](../../adr/0015-segmentacion-red.md)).
 
 **El servidor hacia afuera** sale por HTTPS a las fuentes externas y a la API del ERP Odoo. Son conexiones salientes; nada entra por ahí.
+
+## Redes
+
+| Red | Quién está | Para qué |
+|---|---|---|
+| `lojagas_net` | PostgreSQL, MLflow, Airflow y los contenedores de trabajo | Plataforma y trabajos. Subred fija `172.30.0.0/24` |
+| `proxy_net` (interna) | Scheduler y proxy del socket | Solo el scheduler puede hablar con el proxy |
+| `interfaz_net` | Interfaz | Sin ruta hacia nada más |
+
+Ningún servicio de `lojagas_net` publica puertos en el servidor. En desarrollo, `compose.dev.yml` publica MLflow y Airflow en `127.0.0.1` porque Docker Desktop no deja llegar a las IP de los contenedores; ese archivo nunca se usa en el servidor.
 
 ## El tablero no tiene autenticación
 
@@ -62,8 +72,9 @@ Las tres primeras condiciones se verifican en la demostración: dónde está pub
 
 ## Qué comprobar antes de dar el despliegue por bueno
 
-1. `docker compose ps` muestra encendidos los cinco persistentes y ninguno de los tres efímeros.
-2. `curl` al puerto del tablero funciona desde un equipo de planificación y falla desde fuera de esa subred.
-3. Airflow y MLflow no responden en la IP interna; solo por túnel SSH.
-4. El contenedor de la interfaz no resuelve los nombres `postgres` ni `mlflow`.
-5. Dentro del contenedor de la interfaz, `predicciones/` y `reportes/` están montados en solo lectura y las demás zonas no existen.
+1. `docker compose ps` muestra encendidos PostgreSQL, MLflow, el proxy, los tres contenedores de Airflow y la interfaz; `airflow-init` terminado con código 0, y ninguno de los tres efímeros.
+2. El DAG `prueba_humo` termina en `success`: Airflow lanza un contenedor de trabajo, este escribe y lee en el Lakehouse, alcanza MLflow y no ve el proxy.
+3. `curl` al puerto del tablero funciona desde un equipo de planificación y falla desde fuera de esa subred.
+4. Airflow y MLflow no responden en la IP del servidor; solo por túnel SSH.
+5. Desde el contenedor de la interfaz, MLflow, Airflow, PostgreSQL y el proxy son inalcanzables **por IP**, no solo por nombre. Que no resuelva los nombres no alcanza: la prueba de humo mostró que un servicio con puerto publicado se alcanzaba por IP aunque el nombre no resolviera.
+6. Dentro del contenedor de la interfaz, `predicciones/` y `reportes/` están montados en solo lectura y las demás zonas no existen.
