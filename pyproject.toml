@@ -61,6 +61,11 @@ dev = [
     "nbstripout>=0.7",
     "jupyterlab>=4",
 ]
+eda = [
+    "ipykernel>=7.4.0",
+    "matplotlib>=3.11.2",
+    "statsmodels>=0.15.0",
+]
 
 [build-system]
 requires = ["hatchling"]
