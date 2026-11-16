@@ -10,7 +10,8 @@ Formato de *model card* (Mitchell et al., 2019), organizado según los component
 ## 2. Target
 - Volumen físico de GLP en **toneladas** por mes y segmento (no USD).
 - Fuente: `kg_glp` de las líneas de factura publicadas; las notas de crédito restan.
-- Regla de segmentos: `referencias/mapa_segmentos.csv` (versión: _[commit]_).
+- Regla de segmentos: `referencias/mapa_segmentos.csv` (versión: _[commit]_). Provisional, por categoría de producto: doméstico, industrial y agroindustrial; la venta de envases de cilindro (≈ 0,75 % de los kg) se excluye porque no es gas. Pendiente de I-04.
+- Solo meses cerrados: la curación descarta lo posterior al último mes cerrado, para que un mes en curso o una exportación cortada no parezcan una caída de la demanda.
 - Anual = suma de las predicciones mensuales. No es un modelo aparte.
 
 ## 3. Datos
@@ -21,19 +22,21 @@ Formato de *model card* (Mitchell et al., 2019), organizado según los component
 | INAMHI | | mes | | _[verificar latencia]_ |
 
 ## 4. Candidatos y protocolo
-- Baselines: ingenuo (t−1) y estacional ingenuo (t−12).
+- **Horizonte provisional de 2**, sujeto al ADR-0014: el sistema corre el día 2 del mes M con datos cerrados hasta M−1 y predice M+1 (el 2 de noviembre predice diciembre). Ninguna feature usa un mes posterior a M−1: los rezagos empiezan en t−2 y las medias móviles se desplazan dos meses.
+- Baselines: ingenuo (t−2, el último mes cerrado) y estacional ingenuo (t−12, el método actual de Lojagas).
 - Candidatos: Lasso, Ridge, Elastic Net, Random Forest, XGBoost, LightGBM y LSTM (condicionado).
-- Walk-forward con ventana expansiva, mínimo _[24]_ meses de entrenamiento. Horizonte provisional de 1, sujeto al ADR-0014.
+- Walk-forward con ventana expansiva, mínimo _[24]_ meses de entrenamiento y un mes de separación entre entrenamiento y prueba: para evaluar diciembre se entrena hasta octubre.
+- **Criterio de éxito:** menor WAPE medio que el estacional ingenuo; se reporta la mejora relativa. El MAPE < 10 % del documento se informa pero no decide (issue I-13): en el EDA, el estacional ingenuo ya da ≈ 3,6 % sobre la serie total.
 - Dos configuraciones con las mismas particiones, algoritmos y presupuesto de búsqueda: **A**, solo variables derivadas del histórico de ventas, y **B**, A más las fuentes contextuales. La comparación pareada por fold y por segmento responde la pregunta de investigación.
 - Hiperparámetros con Optuna **dentro** de cada fold (validación anidada).
 
 ## 5. Resultados
-| Modelo | Config. | WAPE | MAPE | MAE (t) | RMSE (t) | R² | Gana al estacional ingenuo |
+| Modelo | Config. | WAPE | Mejora sobre el estacional ingenuo (%) | MAPE | MAE (t) | RMSE (t) | R² |
 |---|---|---|---|---|---|---|---|
 
 ## 6. Supuestos y limitaciones
 - Aproximadamente 46 meses de historia: la varianza de las métricas entre folds es alta. Se reporta media ± desviación.
-- El MAPE se indefine con meses en cero. Se reporta WAPE como métrica principal y MAPE como criterio del documento.
+- El MAPE se indefine con meses en cero y explota en segmentos de bajo volumen. Se reporta WAPE como métrica principal y MAPE porque lo usa el documento.
 
 ## 7. Explicabilidad
 SHAP sobre el último fold.

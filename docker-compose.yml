@@ -25,10 +25,6 @@ x-airflow-common: &airflow-common
     LOJAGAS_IMAGE_TAG: ${LOJAGAS_IMAGE_TAG}
     LOJAGAS_DOCKER_URL: tcp://docker-proxy:2375
     LOJAGAS_NETWORK: lojagas_net
-    ODOO_URL: ${ODOO_URL}
-    ODOO_DB: ${ODOO_DB}
-    ODOO_API_KEY: ${ODOO_API_KEY}
-    LOJAGAS_PII_SALT: ${LOJAGAS_PII_SALT:?generar LOJAGAS_PII_SALT antes de cualquier ingesta}
   volumes:
     - ./dags:/opt/airflow/dags:ro
     - airflow_logs:/opt/airflow/logs
@@ -39,7 +35,7 @@ x-airflow-common: &airflow-common
 
 services:
   postgres:
-    image: postgres:16
+    image: postgres:16.15   # versión exacta: un pull no cambia el motor sin aviso
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -73,7 +69,9 @@ services:
 
   docker-proxy:
     # Expone al socket de Docker solo lo que DockerOperator necesita
-    image: tecnativa/docker-socket-proxy:latest
+    # Versión y digest fijos: es la imagen verificada en la prueba de humo. Con :latest,
+    # un pull podía cambiar sin aviso el contenedor que controla el acceso a Docker.
+    image: tecnativa/docker-socket-proxy:v0.5.0@sha256:1f5038b54f06c3e18422902cf00ba21803d1c97805aae032e5e6673d532d3459
     environment:
       CONTAINERS: 1
       IMAGES: 1
@@ -111,6 +109,14 @@ services:
   airflow-scheduler:
     <<: *airflow-common
     command: scheduler
+    environment:
+      <<: *airflow-env
+      # Secretos solo aquí (R12): con LocalExecutor, el scheduler ejecuta las tareas y
+      # cada una recibe únicamente los suyos (dags/_comun.py). No se serializan en db_airflow.
+      ODOO_URL: ${ODOO_URL}
+      ODOO_DB: ${ODOO_DB}
+      ODOO_API_KEY: ${ODOO_API_KEY}
+      LOJAGAS_PII_SALT: ${LOJAGAS_PII_SALT:?generar LOJAGAS_PII_SALT antes de cualquier ingesta}
     depends_on:
       airflow-init:
         condition: service_completed_successfully

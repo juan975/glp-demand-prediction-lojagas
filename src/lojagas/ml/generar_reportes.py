@@ -12,8 +12,9 @@
    tener que consultar MLflow por HTTP, y es la razón por la que el contenedor de la
    interfaz no necesita conexión de red hacia ningún otro contenedor (ADR-0011).
 
-   Columnas del resumen: `version_modelo`, `alias`, `fecha_entrenamiento`, `mape`,
-   `mae`, `rmse`, `r2`, `mejora_sobre_ingenuo` y `periodo_evaluado`.
+   Columnas del resumen: `version_modelo`, `alias`, `fecha_entrenamiento`, `wape`,
+   `mape`, `mae`, `rmse`, `r2`, `mejora_sobre_ingenuo` (sobre el WAPE del estacional
+   ingenuo) y `periodo_evaluado`.
 
 Lo que sale de aquí lo consume el área de planificación, así que **todo va agregado por
 segmento y por mes**. Nada a nivel de cliente: el tablero no exige autenticación y esa

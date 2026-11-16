@@ -27,13 +27,26 @@ ENV_COMUN = {
     "LOJAGAS_IMAGE_TAG": IMAGE_TAG,
 }
 
+# Día en que corre el DAG; el CLI deduce el mes cerrado (lojagas.comun.periodos).
+# `params.fecha_ejecucion` permite simular o reprocesar una corrida desde la UI.
+FECHA_EJECUCION = "{{ params.fecha_ejecucion or ds }}"
 
-def tarea(task_id: str, imagen: str, comando: list[str], **kwargs) -> DockerOperator:
-    """Crea una tarea que corre `lojagas <comando>` en la imagen indicada."""
-    secretos = {
-        k: os.environ.get(k, "")
-        for k in ("ODOO_URL", "ODOO_DB", "ODOO_API_KEY", "LOJAGAS_PII_SALT")
-    }
+SECRETOS_ODOO = ("ODOO_URL", "ODOO_DB", "ODOO_API_KEY")
+SECRETO_PII = ("LOJAGAS_PII_SALT",)
+
+
+def tarea(
+    task_id: str,
+    imagen: str,
+    comando: list[str],
+    secretos: tuple[str, ...] = (),
+    **kwargs,
+) -> DockerOperator:
+    """Crea una tarea que corre `lojagas <comando>` en la imagen indicada.
+
+    Cada tarea recibe solo los secretos que usa (R12): la API de Odoo, la ingesta;
+    la sal de PII, la curación. El resto no ve ninguno.
+    """
     return DockerOperator(
         task_id=task_id,
         image=f"lojagas/{imagen}:{IMAGE_TAG}",
@@ -42,8 +55,9 @@ def tarea(task_id: str, imagen: str, comando: list[str], **kwargs) -> DockerOper
         network_mode=NETWORK,
         mounts=[MOUNT_LAKEHOUSE, MOUNT_REPORTES],
         environment={**ENV_COMUN, "LOJAGAS_RUN_ID": "{{ run_id }}"},
-        private_environment=secretos,  # no se muestran en la UI de Airflow
+        private_environment={k: os.environ.get(k, "") for k in secretos},  # no salen en la UI
         mount_tmp_dir=False,  # con el proxy, la carpeta temporal de Airflow no existe en el host
         auto_remove="success",
+        do_xcom_push=False,  # C-08 (R11): nada de la salida del contenedor llega a db_airflow
         **kwargs,
     )

@@ -21,6 +21,8 @@ ventas_raw = pa.DataFrameSchema(
                 ["despacho", "planilla", "turno", "proyecto", "cotizacion", "sin_origen"]
             ),
         ),
+        # Clave de mapa_segmentos.csv: sin ella no se puede asignar el segmento
+        "categoria": pa.Column(str, nullable=True),
         "cantidad": pa.Column(float),
         "kg_glp": pa.Column(float, pa.Check.ge(0), nullable=True),
     },

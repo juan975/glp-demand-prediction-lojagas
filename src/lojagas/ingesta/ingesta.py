@@ -29,12 +29,14 @@ def ejecutar_odoo(cfg: Config, periodo: str) -> int:
     inicio = date.fromisoformat(periodo)
     fin = (pd.Timestamp(inicio) + pd.offsets.MonthEnd(0)).date()
     facturas = odoo_api.extraer_facturas(cfg, inicio, fin)
-    return lakehouse.escribir(
+    # Reemplaza el mes en vez de agregarlo: un reintento de Airflow no duplica facturas
+    return lakehouse.reemplazar_periodo(
         _con_metadatos(facturas, "odoo", periodo),
         cfg.lakehouse,
         "raw",
         "ventas_lineas",
-        particiones=["_periodo"],
+        columna="_periodo",
+        valor=periodo,
     )
 
 

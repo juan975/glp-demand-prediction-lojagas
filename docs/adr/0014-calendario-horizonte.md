@@ -9,12 +9,16 @@ Hoy las piezas no coinciden:
 
 - `dags/prediccion_mensual.py` corre el día 2 de cada mes a las 06:00.
 - El Word (3.4.5.5) dice que el DAG corre el primer día de cada mes y predice el mes siguiente.
-- La model card fija horizonte 1.
+- La model card fijaba horizonte 1 (hasta la decisión provisional de abajo).
 
 En una reunión, Lojagas indicó que necesita tiempo para preparar sus pedidos, pero todavía no se definió la fecha límite ni a qué mes corresponde cada pedido.
 
 ## Decisión provisional
 Se mantiene la ejecución el día 2. Ese día el mes anterior ya está cerrado y la predicción llega con el mayor margen posible. Ejecutar a mediados de mes no da más tiempo de planificación para el mismo mes objetivo: da menos.
+
+Se trabaja con **horizonte 2**: el día 2 del mes M, con datos hasta M−1, se predice M+1 (el 2 de noviembre se predice diciembre). El código lo lee de `Config.horizonte_meses`, y de ese valor dependen los rezagos, las medias móviles, el baseline ingenuo y la separación del walk-forward; un test falla si una feature usa un mes no cerrado. Si Lojagas confirma horizonte 1, se cambia ese valor y se repiten los experimentos.
+
+El EDA apoya el día 2: por el orden de `factura_id`, como máximo el 0,02 % de los kg de un mes se registra después del día 2 del mes siguiente. Es una aproximación: no detecta borradores publicados tarde (falta `create_date`).
 
 ## Pregunta para Lojagas
 ¿Cuál es la fecha límite para solicitar el cupo de GLP y a qué mes corresponde ese pedido?

@@ -35,6 +35,12 @@ def lineas_factura() -> pd.DataFrame:
             "move_type": ["out_invoice", "out_invoice", "out_refund", "out_invoice"],
             "state": ["posted"] * 4,
             "canal_venta": ["despacho", "despacho", "despacho", "planilla"],
+            "categoria": [
+                "GLP / GLP INDUSTRIAL",
+                "GLP / GLP DOMESTICO",
+                "GLP / GLP INDUSTRIAL",
+                "GLP / GLP DOMESTICO",
+            ],
             "cliente_tipo": ["INDUSTRIAL", "HOGAR", "INDUSTRIAL", "HOGAR"],
             "cantidad": [1.0, 1.0, 1.0, 1.0],
             "kg_glp": [2000.0, 500.0, 300.0, 150.0],

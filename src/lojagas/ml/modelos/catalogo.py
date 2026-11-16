@@ -58,3 +58,11 @@ CATALOGO: dict[str, Callable[[], RegressorMixin]] = {
 }
 
 BASELINES = ("ingenuo", "estacional_ingenuo")
+
+
+def crear(nombre: str, horizonte: int) -> RegressorMixin:
+    """Modelo nuevo para un fold. Los que dependen del horizonte (el ingenuo) lo reciben aquí."""
+    modelo = CATALOGO[nombre]()
+    if "horizonte" in modelo.get_params():
+        modelo.set_params(horizonte=horizonte)
+    return modelo
