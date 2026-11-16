@@ -29,7 +29,7 @@ El octavo es el **Contenedor Interfaz**, y es el único aplicativo que permanece
 
 Es una decisión discutible y conviene dejarla por escrito antes de que la pregunten.
 
-Renderizar los Excel y los PDF no necesita el modelo: ese script lee la zona Predicciones y la demanda observada, y produce archivos. En rigor podría vivir en una imagen propia, mucho más liviana que la de ML, que arrastra scikit-learn, XGBoost, LightGBM, Optuna, SHAP y torch CPU.
+Renderizar los Excel y los PDF no necesita el modelo: ese script lee la zona Predicciones y la demanda observada, y produce archivos. En rigor podría vivir en una imagen propia, mucho más liviana que la de ML, que arrastra scikit-learn, XGBoost, LightGBM, Optuna y SHAP (y torch CPU cuando se implemente la LSTM).
 
 Se mantiene en el contenedor de ML por dos razones. La primera es que predecir y reportar son el mismo paso del flujo mensual: separarlos añade una tarea al DAG y una lectura intermedia desde disco a cambio de nada que el proyecto necesite hoy. La segunda es de alcance: un cuarto Dockerfile es superficie que mantener en un TIC de dos personas.
 

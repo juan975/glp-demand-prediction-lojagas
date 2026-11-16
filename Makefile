@@ -1,7 +1,8 @@
 -include .env
 export
 
-GIT_SHA := $(shell git rev-parse --short HEAD 2>/dev/null || echo dev)
+# "-dirty" si hay cambios sin commit: la etiqueta no debe atribuir a un commit código que no tiene
+GIT_SHA := $(shell git describe --always --dirty 2>/dev/null || echo dev)
 
 .PHONY: dirs build up down test lint dags-check
 

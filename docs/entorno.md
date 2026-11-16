@@ -101,13 +101,13 @@ Reglas sin excepciones:
 ## 5. Levantar la plataforma y comprobarla
 
 ```bash
-docker compose --profile jobs build ingesta procesamiento
+docker compose --profile jobs build ingesta procesamiento ml   # versiones exactas de uv.lock
 docker compose config --quiet && echo "config OK"
 docker compose up -d
 docker compose ps
 ```
 
-`docker compose up -d` no levanta los contenedores de trabajo: esos solo se construyen, y es Airflow quien los lanza. (`make build` es para el servidor: etiqueta las imágenes con el SHA del commit, y entonces hay que poner ese SHA en `LOJAGAS_IMAGE_TAG`.)
+`docker compose up -d` no levanta los contenedores de trabajo: esos solo se construyen, y es Airflow quien los lanza. (`make build` es para el servidor: etiqueta las imágenes con el SHA del commit, y entonces hay que poner ese SHA en `LOJAGAS_IMAGE_TAG`. Si hay cambios sin commit, la etiqueta lleva `-dirty`: en el servidor solo se despliegan imágenes sin ese sufijo.)
 
 ```bash
 curl -s http://127.0.0.1:8080/api/v2/monitor/health; echo
