@@ -1,5 +1,5 @@
 # Responsable principal por contenedor del diagrama de despliegue. La otra persona revisa.
-# Plataforma + Procesamiento → juan975 | Ingesta + ML → daravan1
+# Plataforma + Procesamiento + Interfaz → juan975 | Ingesta + ML → daravan1
 
 /docker/                          @juan975
 /docker-compose.yml               @juan975
@@ -11,8 +11,8 @@
 /src/lojagas/ml/                  @daravan1
 /notebooks/                       @daravan1
 
-# TODO: asignar un responsable único antes de implementar el tablero.
-/src/lojagas/interfaz/            @juan975 @daravan1
+# Tablero de consulta (ADR-0011): responsable Juan desde el 16 nov 2026.
+/src/lojagas/interfaz/            @juan975
 
 # Cambian dependencias, CI, el target o la arquitectura: revisan ambos
 /pyproject.toml                   @juan975 @daravan1

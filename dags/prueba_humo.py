@@ -48,4 +48,5 @@ with DAG(
         environment={"LOJAGAS_RUN_ID": "{{ run_id }}"},
         mount_tmp_dir=False,
         auto_remove="success",
+        do_xcom_push=False,
     )

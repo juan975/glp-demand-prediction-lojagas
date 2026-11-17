@@ -50,6 +50,30 @@ def escribir(
     return DeltaTable(str(ruta)).version()
 
 
+def reemplazar_periodo(
+    df: pd.DataFrame, raiz: Path, zona: Zona, tabla: str, columna: str, valor: str
+) -> int:
+    """Reemplaza solo las filas con `columna == valor` y devuelve la versión Delta.
+
+    Idempotente: si Airflow reintenta la corrida de un mes, ese mes se reescribe en vez
+    de duplicarse, y el resto del historial no se toca. La versión anterior sigue
+    disponible por time travel.
+    """
+    if not (df[columna] == valor).all():
+        raise ValueError(f"Todas las filas deben tener {columna} = {valor}")
+    ruta = ruta_tabla(raiz, zona, tabla)
+    if not DeltaTable.is_deltatable(str(ruta)):
+        return escribir(df, raiz, zona, tabla, modo="append", particiones=[columna])
+    write_deltalake(
+        str(ruta),
+        df,
+        mode="overwrite",
+        predicate=f"{columna} = '{valor}'",
+        schema_mode="merge",
+    )
+    return DeltaTable(str(ruta)).version()
+
+
 def leer(raiz: Path, zona: Zona, tabla: str, version: int | None = None) -> pd.DataFrame:
     """Lee la última versión o una versión exacta (time travel)."""
     ruta = ruta_tabla(raiz, zona, tabla)

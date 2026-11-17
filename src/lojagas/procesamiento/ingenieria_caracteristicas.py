@@ -7,12 +7,14 @@ import pandas as pd
 from lojagas.comun import lakehouse
 from lojagas.comun.config import Config
 from lojagas.procesamiento.eventos import dias_evento_en_mes
-from lojagas.procesamiento.temporales import calendario, rezagos
+from lojagas.procesamiento.temporales import calendario, extender_futuro, rezagos
 
 
-def construir(mensual: pd.DataFrame, eventos: pd.DataFrame | None = None) -> pd.DataFrame:
-    """Función pura (se testea sin lakehouse)."""
-    df = calendario(rezagos(mensual))
+def construir(
+    mensual: pd.DataFrame, eventos: pd.DataFrame | None = None, *, horizonte: int
+) -> pd.DataFrame:
+    """Función pura (se testea sin lakehouse). Incluye las filas futuras sin target."""
+    df = calendario(rezagos(extender_futuro(mensual, horizonte), horizonte=horizonte))
     if eventos is not None:
         df["dias_religioso"] = dias_evento_en_mes(df["mes"], eventos, "religioso").to_numpy()
     return df
@@ -20,9 +22,9 @@ def construir(mensual: pd.DataFrame, eventos: pd.DataFrame | None = None) -> pd.
 
 def ejecutar(cfg: Config) -> int:
     mensual = lakehouse.leer(cfg.lakehouse, "curated", "ventas_mensual")
-    eventos = lakehouse.leer(cfg.lakehouse, "raw", "calendario_eventos")
+    eventos = lakehouse.leer(cfg.lakehouse, "curated", "calendario_eventos")
     return lakehouse.escribir(
-        construir(mensual, eventos),
+        construir(mensual, eventos, horizonte=cfg.horizonte_meses),
         cfg.lakehouse,
         "feature",
         "demanda_mensual",

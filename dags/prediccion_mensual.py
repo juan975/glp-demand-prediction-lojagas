@@ -1,15 +1,15 @@
 """Escenario +1 (a): generación mensual programada de la predicción.
 
 Ingesta → Procesamiento (curación, ingeniería de características) → ML (predicción, reportes).
-Corre el día 2 de cada mes para dar margen al cierre contable del mes anterior
-(supuesto a validar con Lojagas: ¿cuándo quedan publicadas todas las facturas?).
+Corre el día 2 del mes M, procesa el último mes cerrado (M−1) y, con horizonte 2, predice
+M+1: el 2 de noviembre procesa octubre y predice diciembre (ADR-0014, provisional).
 """
 
 from __future__ import annotations
 
 import pendulum
-from _comun import tarea
-from airflow.sdk import DAG
+from _comun import FECHA_EJECUCION, SECRETO_PII, SECRETOS_ODOO, tarea
+from airflow.sdk import DAG, Param
 
 with DAG(
     dag_id="prediccion_mensual",
@@ -18,18 +18,24 @@ with DAG(
     catchup=False,
     max_active_runs=1,
     tags=["lojagas", "batch"],
+    params={
+        "fecha_ejecucion": Param(
+            None,
+            type=["null", "string"],
+            format="date",
+            description="Simula o reprocesa una corrida: 2026-11-02 procesa octubre de 2026.",
+        )
+    },
 ) as dag:
-    periodo = "{{ data_interval_start | ds }}"
+    cuando = ["--fecha-ejecucion", FECHA_EJECUCION]
 
-    ingesta_odoo = tarea("ingesta_odoo", "ingesta", ["ingesta-odoo", "--periodo", periodo])
-    ingesta_externas = tarea(
-        "ingesta_externas", "ingesta", ["ingesta-externas", "--periodo", periodo]
-    )
-    curacion = tarea("curacion", "procesamiento", ["curacion"])
+    ingesta_odoo = tarea("ingesta_odoo", "ingesta", ["ingesta-odoo", *cuando], SECRETOS_ODOO)
+    ingesta_externas = tarea("ingesta_externas", "ingesta", ["ingesta-externas", *cuando])
+    curacion = tarea("curacion", "procesamiento", ["curacion", *cuando], SECRETO_PII)
     caracteristicas = tarea(
         "ingenieria_caracteristicas", "procesamiento", ["ingenieria-caracteristicas"]
     )
-    predecir = tarea("predecir", "ml", ["predecir", "--periodo", periodo])
-    reportes = tarea("generar_reportes", "ml", ["generar-reportes", "--periodo", periodo])
+    predecir = tarea("predecir", "ml", ["predecir", *cuando])
+    reportes = tarea("generar_reportes", "ml", ["generar-reportes", *cuando])
 
     [ingesta_odoo, ingesta_externas] >> curacion >> caracteristicas >> predecir >> reportes

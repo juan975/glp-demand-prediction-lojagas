@@ -15,6 +15,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from datetime import date
 
 
 def _ingesta_odoo(cfg, a):
@@ -32,7 +33,7 @@ def _ingesta_externas(cfg, a):
 def _curacion(cfg, a):
     from lojagas.procesamiento.curacion import ejecutar
 
-    return ejecutar(cfg)
+    return ejecutar(cfg, a.periodo)
 
 
 def _ingenieria(cfg, a):
@@ -45,17 +46,28 @@ def _pendiente(cfg, a):
     raise NotImplementedError(f"'{a.comando}' aún no implementado")
 
 
-# Importaciones diferidas: cada imagen Docker solo instala las dependencias de su contenedor
+# Importaciones diferidas: cada imagen Docker solo instala las dependencias de su contenedor.
+# El tercer valor indica si el subcomando necesita saber qué mes procesa.
 SUBCOMANDOS = {
-    "ingesta-odoo": ("Odoo API → Raw", _ingesta_odoo),
-    "ingesta-externas": ("Fuentes externas → Raw", _ingesta_externas),
-    "curacion": ("Raw → Curated", _curacion),
-    "ingenieria-caracteristicas": ("Curated → Feature", _ingenieria),
-    "entrenar": ("Walk-forward de candidatos → MLflow Tracking", _pendiente),
-    "evaluar": ("Selección + SHAP → Model Registry (alias candidato)", _pendiente),
-    "predecir": ("Model Registry → zona Predicciones", _pendiente),
-    "generar-reportes": ("Predicciones → Excel/PDF en reportes/", _pendiente),
+    "ingesta-odoo": ("Odoo API → Raw", _ingesta_odoo, True),
+    "ingesta-externas": ("Fuentes externas → Raw", _ingesta_externas, True),
+    "curacion": ("Raw → Curated", _curacion, True),
+    "ingenieria-caracteristicas": ("Curated → Feature", _ingenieria, False),
+    "entrenar": ("Walk-forward de candidatos → MLflow Tracking", _pendiente, False),
+    "evaluar": ("Selección + SHAP → Model Registry (alias candidato)", _pendiente, False),
+    "predecir": ("Model Registry → zona Predicciones", _pendiente, True),
+    "generar-reportes": ("Predicciones → Excel/PDF en reportes/", _pendiente, True),
 }
+
+
+def _resolver_periodo(args) -> str | None:
+    from lojagas.comun.periodos import ultimo_mes_cerrado, validar_periodo
+
+    if args.fecha_ejecucion is not None:
+        return ultimo_mes_cerrado(date.fromisoformat(args.fecha_ejecucion)).isoformat()
+    if args.periodo is not None:
+        return validar_periodo(args.periodo).isoformat()
+    return None
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -63,10 +75,22 @@ def main(argv: list[str] | None = None) -> int:
 
     parser = argparse.ArgumentParser(prog="lojagas")
     sub = parser.add_subparsers(dest="comando", required=True)
-    for nombre, (ayuda, _) in SUBCOMANDOS.items():
+    for nombre, (ayuda, _, _) in SUBCOMANDOS.items():
         p = sub.add_parser(nombre, help=ayuda)
-        p.add_argument("--periodo", help="Primer día del mes procesado (YYYY-MM-DD)")
+        cuando = p.add_mutually_exclusive_group()
+        cuando.add_argument(
+            "--fecha-ejecucion",
+            help="Día en que corre el DAG (YYYY-MM-DD); procesa el mes anterior",
+        )
+        cuando.add_argument("--periodo", help="Último mes cerrado, para reprocesar (YYYY-MM-01)")
     args = parser.parse_args(argv)
+
+    try:
+        args.periodo = _resolver_periodo(args)
+    except ValueError as e:
+        parser.error(str(e))
+    if SUBCOMANDOS[args.comando][2] and args.periodo is None:
+        parser.error(f"'{args.comando}' necesita --fecha-ejecucion o --periodo")
 
     try:
         resultado = SUBCOMANDOS[args.comando][1](cargar(), args)

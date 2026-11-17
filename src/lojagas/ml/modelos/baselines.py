@@ -12,24 +12,35 @@ from sklearn.base import BaseEstimator, RegressorMixin
 
 
 class _BaselineLag(BaseEstimator, RegressorMixin):
-    columna: str = ""
+    def _columna(self) -> str:
+        raise NotImplementedError
 
     def fit(self, X: pd.DataFrame, y=None):
-        if self.columna not in X.columns:
-            raise ValueError(f"El baseline necesita la feature '{self.columna}'")
+        if self._columna() not in X.columns:
+            raise ValueError(f"El baseline necesita la feature '{self._columna()}'")
         return self
 
     def predict(self, X: pd.DataFrame) -> np.ndarray:
-        return X[self.columna].to_numpy(dtype=float)
+        return X[self._columna()].to_numpy(dtype=float)
 
 
 class Ingenuo(_BaselineLag):
-    """ŷ_t = y_{t-1}"""
+    """ŷ_t = y_{t−h}: el último mes cerrado al predecir con horizonte h.
 
-    columna = "lag_1"
+    Con h = 2, y_{t−1} todavía no existe: copiarlo sería usar información del futuro.
+    """
+
+    def __init__(self, horizonte: int | None = None):
+        self.horizonte = horizonte
+
+    def _columna(self) -> str:
+        if self.horizonte is None:
+            raise ValueError("Ingenuo necesita el horizonte (ver catalogo.crear)")
+        return f"lag_{self.horizonte}"
 
 
 class EstacionalIngenuo(_BaselineLag):
-    """ŷ_t = y_{t-12}"""
+    """ŷ_t = y_{t−12}: el método actual de Lojagas. Válido con cualquier horizonte ≤ 12."""
 
-    columna = "lag_12"
+    def _columna(self) -> str:
+        return "lag_12"

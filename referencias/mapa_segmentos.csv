@@ -1,3 +1,6 @@
-canal_venta,cliente_tipo,segmento
-despacho,*,granel
-planilla,*,domicilio_tuberia
+categoria,segmento
+GLP / GLP DOMESTICO,domestico
+GLP / GLP INDUSTRIAL,industrial
+GLP / GLP AGROINDUSTRIAL,agroindustrial
+CILINDROS / ENVASE CILINDROS,excluir
+CILINDROS / ENVASE CILINDROS PARA LA VENTA,excluir

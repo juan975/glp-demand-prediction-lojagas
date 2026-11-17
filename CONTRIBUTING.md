@@ -40,7 +40,7 @@ Por contenedor del diagrama de despliegue. El detalle y las reglas para mantener
 6. **Toda inconsistencia con el Word es un issue** con la etiqueta `tesis`. Es el backlog oficial (`docs/inconsistencias.md` explica la convención).
 7. **Nunca se imprimen registros de clientes**, ni para depurar. Lo que imprime un contenedor de trabajo queda en los logs de Airflow y la última línea en su base de datos: PII fuera del Lakehouse.
 8. **Los hooks no se saltan.** Nada de `--no-verify`. Si un hook modifica un archivo, se vuelve a hacer `git add` y se repite el commit.
-9. **Dependencias con `uv add`** en el extra que corresponda, con `pyproject.toml` y `uv.lock` en el mismo commit. Nada de `pip install` dentro del entorno.
+9. **Dependencias con `uv add`** en el extra que corresponda, con `pyproject.toml` y `uv.lock` en el mismo commit. Nada de `pip install` dentro del entorno. Las imágenes de Docker instalan desde `uv.lock` con `uv sync --locked`: si el lock no está al día, la construcción falla.
 10. **Si cambia `docker-compose.yml`, un Dockerfile o las redes**, el DAG `prueba_humo` tiene que terminar en `success` antes de pedir revisión.
 
 ## Etiquetas de issues

@@ -1,17 +1,26 @@
-FROM python:3.11-slim
+FROM python:3.11.18-slim-trixie
+COPY --from=ghcr.io/astral-sh/uv:0.13.7 /uv /bin/uv
 
-ARG GIT_SHA=dev
-ENV LOJAGAS_GIT_SHA=${GIT_SHA} \
-    PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    UV_LINK_MODE=copy \
+    UV_PYTHON_DOWNLOADS=never \
+    PATH="/app/.venv/bin:$PATH"
 
 WORKDIR /app
-COPY pyproject.toml README.md ./
-COPY src ./src
-
 # Sin scikit-learn, sin torch, sin cliente de MLflow ni de PostgreSQL: este contenedor
 # solo lee archivos. Mantenerlo liviano importa porque es el único que queda encendido.
-RUN pip install --no-cache-dir ".[interfaz]"
+# Versiones exactas de uv.lock (--locked falla si no coincide con pyproject.toml).
+COPY pyproject.toml uv.lock README.md ./
+RUN --mount=type=cache,target=/root/.cache/uv,sharing=locked \
+    uv sync --locked --no-dev --extra interfaz --no-install-project
+COPY src ./src
+RUN --mount=type=cache,target=/root/.cache/uv,sharing=locked \
+    uv sync --locked --no-dev --extra interfaz --no-editable
+
+# Al final: cambia en cada commit y no debe invalidar la capa de dependencias
+ARG GIT_SHA=dev
+ENV LOJAGAS_GIT_SHA=${GIT_SHA}
 
 RUN useradd --create-home lojagas
 USER lojagas

@@ -28,7 +28,9 @@ class Config:
     modelo_registrado: str = "lojagas_demanda_glp"
     alias_produccion: str = "produccion"
     alias_candidato: str = "candidato"
-    horizonte_meses: int = 1
+    # El DAG corre el día 2 del mes M con datos cerrados hasta M−1 y predice M+1
+    # (p. ej., el 2 de noviembre predice diciembre). Provisional hasta cerrar el ADR-0014.
+    horizonte_meses: int = 2
     meses_minimos_entrenamiento: int = 24
 
 
