@@ -34,6 +34,22 @@ def extender_futuro(
     return pd.concat([df, nuevas], ignore_index=True)
 
 
+def rezago_minimo_externo(disponible_desde_dias: int, dia_ejecucion: int, horizonte: int) -> int:
+    """Menor rezago, en meses respecto del mes a predecir, de una fuente externa que ya está
+    publicada el día en que corre el DAG.
+
+    El DAG corre el día `dia_ejecucion` del mes M y predice M + horizonte − 1. El dato del mes
+    M − k se publica `disponible_desde_dias` días después de que ese mes termina. Se cuenta
+    con el peor caso (meses de 28 días hacia atrás, de 31 hacia adelante), así que el rezago
+    nunca es menor que el real. Con ERA5-Land (7 días) y la corrida del día 2 solo está M − 2:
+    rezago 3. Una fuente que se conoce de antemano, como el calendario, puede entrar sin rezago.
+    """
+    k = 1 - horizonte  # el propio mes a predecir: rezago 0
+    while disponible_desde_dias > (28 if k >= 1 else 31) * (k - 1) + dia_ejecucion:
+        k += 1
+    return horizonte - 1 + k
+
+
 def rezagos(
     df: pd.DataFrame,
     *,
