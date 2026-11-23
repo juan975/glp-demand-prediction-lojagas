@@ -23,6 +23,9 @@ ingesta = [
     "requests>=2.32",
     "beautifulsoup4>=4.12",
     "pdfplumber>=0.11",
+    "cdsapi>=0.7",
+    "xarray>=2024.9",
+    "netcdf4>=1.7",
 ]
 # Contenedor Procesamiento: curación e ingeniería de características (incluye SIG)
 procesamiento = [

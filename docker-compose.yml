@@ -116,6 +116,8 @@ services:
       ODOO_URL: ${ODOO_URL}
       ODOO_DB: ${ODOO_DB}
       ODOO_API_KEY: ${ODOO_API_KEY}
+      CDSAPI_URL: ${CDSAPI_URL}
+      CDSAPI_KEY: ${CDSAPI_KEY}
       LOJAGAS_PII_SALT: ${LOJAGAS_PII_SALT:?generar LOJAGAS_PII_SALT antes de cualquier ingesta}
     depends_on:
       airflow-init:

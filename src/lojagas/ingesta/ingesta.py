@@ -15,6 +15,7 @@ from lojagas.comun import lakehouse
 from lojagas.comun.config import Config
 from lojagas.ingesta import odoo_api
 from lojagas.ingesta.externas.calendario import CalendarioEventos
+from lojagas.ingesta.externas.era5_land import ERA5Land
 
 
 def _con_metadatos(df: pd.DataFrame, fuente: str, periodo: str) -> pd.DataFrame:
@@ -42,7 +43,7 @@ def ejecutar_odoo(cfg: Config, periodo: str) -> int:
 
 def ejecutar_externas(cfg: Config, periodo: str) -> dict[str, int]:
     versiones = {}
-    for fuente in (CalendarioEventos(),):  # agregar INAMHI, Petroecuador... al implementarlas
+    for fuente in (CalendarioEventos(), ERA5Land()):  # agregar Petroecuador al implementarla
         datos = fuente.extraer(periodo)
         versiones[fuente.nombre] = lakehouse.escribir(
             _con_metadatos(datos, fuente.nombre, periodo),
