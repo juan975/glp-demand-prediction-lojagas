@@ -33,6 +33,7 @@ FECHA_EJECUCION = "{{ params.fecha_ejecucion or ds }}"
 
 SECRETOS_ODOO = ("ODOO_URL", "ODOO_DB", "ODOO_API_KEY")
 SECRETO_PII = ("LOJAGAS_PII_SALT",)
+SECRETOS_CDS = ("CDSAPI_URL", "CDSAPI_KEY")  # ERA5-Land (Copernicus)
 
 
 def tarea(
@@ -45,6 +46,7 @@ def tarea(
     """Crea una tarea que corre `lojagas <comando>` en la imagen indicada.
 
     Cada tarea recibe solo los secretos que usa (R12): la API de Odoo, la ingesta;
+    la clave de Copernicus, la ingesta externa;
     la sal de PII, la curación. El resto no ve ninguno.
     """
     return DockerOperator(

@@ -8,7 +8,7 @@ M+1: el 2 de noviembre procesa octubre y predice diciembre (ADR-0014, provisiona
 from __future__ import annotations
 
 import pendulum
-from _comun import FECHA_EJECUCION, SECRETO_PII, SECRETOS_ODOO, tarea
+from _comun import FECHA_EJECUCION, SECRETO_PII, SECRETOS_CDS, SECRETOS_ODOO, tarea
 from airflow.sdk import DAG, Param
 
 with DAG(
@@ -30,7 +30,9 @@ with DAG(
     cuando = ["--fecha-ejecucion", FECHA_EJECUCION]
 
     ingesta_odoo = tarea("ingesta_odoo", "ingesta", ["ingesta-odoo", *cuando], SECRETOS_ODOO)
-    ingesta_externas = tarea("ingesta_externas", "ingesta", ["ingesta-externas", *cuando])
+    ingesta_externas = tarea(
+        "ingesta_externas", "ingesta", ["ingesta-externas", *cuando], SECRETOS_CDS
+    )
     curacion = tarea("curacion", "procesamiento", ["curacion", *cuando], SECRETO_PII)
     caracteristicas = tarea(
         "ingenieria_caracteristicas", "procesamiento", ["ingenieria-caracteristicas"]
