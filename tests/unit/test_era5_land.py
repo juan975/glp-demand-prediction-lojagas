@@ -49,6 +49,16 @@ def test_extraer_una_fila_por_mes_y_pixel_sin_meses_vacios():
     assert df["t2m"].iloc[0] == pytest.approx(293.15)  # Raw conserva las unidades de CDS
 
 
+def test_extraer_no_guarda_meses_posteriores_al_periodo():
+    def descargador(solicitud, destino):
+        _netcdf_falso(destino, mes_sin_publicar=False)  # CDS ya publicó hasta enero
+
+    df = ERA5Land(descargador=descargador, anio_inicio=2024).extraer("2024-11-01")
+
+    assert df["fecha"].max() == pd.Timestamp("2024-11-01")
+    assert len(df) == 2 * 1 * 4  # 2 provincias × noviembre × 4 píxeles
+
+
 def test_conversion_de_unidades():
     df = pd.DataFrame(
         {
