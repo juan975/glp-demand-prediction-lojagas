@@ -31,6 +31,9 @@ class Config:
     # El DAG corre el día 2 del mes M con datos cerrados hasta M−1 y predice M+1
     # (p. ej., el 2 de noviembre predice diciembre). Provisional hasta cerrar el ADR-0014.
     horizonte_meses: int = 2
+    # Día del mes en que corre el DAG: decide qué fuentes externas ya están publicadas
+    # (rezago_minimo_externo). Debe coincidir con el schedule de dags/prediccion_mensual.py.
+    dia_ejecucion: int = 2
     meses_minimos_entrenamiento: int = 24
 
 
