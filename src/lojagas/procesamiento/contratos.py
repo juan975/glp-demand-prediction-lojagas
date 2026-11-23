@@ -40,3 +40,16 @@ ventas_mensual_curated = pa.DataFrameSchema(
     strict=True,
     coerce=True,
 )
+
+actividad_dia_semana_curated = pa.DataFrameSchema(
+    {
+        "segmento": pa.Column(str),
+        "dia_semana": pa.Column(int, pa.Check.in_range(0, 6)),  # 0 = lunes
+        "peso": pa.Column(float, pa.Check.ge(0)),
+        "desde": pa.Column("datetime64[ns]"),
+        "hasta": pa.Column("datetime64[ns]"),
+    },
+    unique=["segmento", "dia_semana"],
+    strict=True,
+    coerce=True,
+)

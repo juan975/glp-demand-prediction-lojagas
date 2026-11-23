@@ -10,6 +10,10 @@ def calendario(df: pd.DataFrame, col_mes: str = "mes") -> pd.DataFrame:
     m = pd.to_datetime(out[col_mes]).dt.month
     out["mes_sin"] = np.sin(2 * np.pi * m / 12)
     out["mes_cos"] = np.cos(2 * np.pi * m / 12)
+    # Segundo armónico: un solo seno/coseno no representa dos picos al año
+    # (el agroindustrial tiene uno en junio y otro en octubre)
+    out["mes_sin2"] = np.sin(4 * np.pi * m / 12)
+    out["mes_cos2"] = np.cos(4 * np.pi * m / 12)
     out["anio"] = pd.to_datetime(out[col_mes]).dt.year
     return out
 
