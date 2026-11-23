@@ -81,5 +81,9 @@ def leer(raiz: Path, zona: Zona, tabla: str, version: int | None = None) -> pd.D
     return dt.to_pandas()
 
 
+def existe(raiz: Path, zona: Zona, tabla: str) -> bool:
+    return DeltaTable.is_deltatable(str(ruta_tabla(raiz, zona, tabla)))
+
+
 def version_actual(raiz: Path, zona: Zona, tabla: str) -> int:
     return DeltaTable(str(ruta_tabla(raiz, zona, tabla))).version()
