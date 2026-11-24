@@ -1,0 +1,231 @@
+mes,provincia,producto,presentacion,precio_usd,fuente_url
+2021-05-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),29.6,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2021-06-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),29.0833,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2021-07-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),28.9006,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2021-08-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),28.7083,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2021-09-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),28.8889,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2021-10-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),29.85,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2021-11-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),30.2692,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2021-12-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),30.4308,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2022-03-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),31.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2022-04-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),31.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2022-05-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),30.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2022-06-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),27.9545,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2022-07-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),30.5,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2022-08-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),30.7308,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2022-09-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),31.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2022-10-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),29.2,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2022-11-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),30.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2022-12-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),29.5,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2023-01-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),30.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2023-02-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),32.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2023-03-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),32.0888,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2023-04-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),33.625,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2023-05-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),33.5,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2023-06-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),44.0167,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2023-07-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),45.45,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2023-08-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),45.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2023-09-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),45.2258,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2023-10-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),45.6129,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2023-11-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),46.3333,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2023-12-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),46.5,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2024-03-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),45.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2024-04-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),47.5,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2024-05-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),47.0625,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2024-06-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),35.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2024-07-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),35.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2024-08-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),41.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2024-09-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),44.3529,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2024-10-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),44.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2024-11-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),46.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2025-02-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),42.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2025-03-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),40.1875,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2025-04-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),39.2667,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2025-05-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),35.871,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2025-06-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),34.381,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2025-07-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),32.4839,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2025-08-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),32.2143,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2025-09-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),34.381,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2025-10-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),34.175,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2025-11-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),33.8571,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2025-12-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),31.075,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2026-01-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),29.925,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2026-02-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),29.186,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2026-03-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),27.2581,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2026-04-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),30.3,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2026-05-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),27.125,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2026-06-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),27.3833,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2026-07-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),26.8389,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2026-08-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),29.0667,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2026-09-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),34.2,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2026-10-01,LOJA,arroz,Arroz (Quintal aprox. 100 Libra),45.8607,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2021-08-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),130.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2021-09-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),130.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2021-10-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),130.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2021-11-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),130.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2021-12-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),150.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2022-03-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),221.6667,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2022-04-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),220.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2022-05-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),240.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2022-06-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),200.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2022-07-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),183.4783,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2022-08-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),200.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2022-09-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),220.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2022-10-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),220.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2022-11-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),220.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2023-01-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),230.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2023-03-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),175.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2023-04-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),178.5,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2023-05-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),178.5,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2023-06-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),183.5,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2023-07-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),183.5,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2023-08-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),170.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2023-09-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),170.0833,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2023-10-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),160.9375,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2023-11-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),142.3333,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2023-12-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),140.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2024-03-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),135.6667,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2024-04-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),139.5833,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2024-05-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),129.0855,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2024-06-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),142.5,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2024-08-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),137.2222,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2024-09-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),142.6,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2024-10-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),151.25,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2024-11-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),151.3889,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2025-02-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),324.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2025-03-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),324.9167,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2025-04-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),250.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2025-05-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),268.3571,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2025-06-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),207.9487,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2025-07-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),252.5926,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2025-08-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),256.5778,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2025-09-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),290.8857,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2025-10-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),305.7857,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2025-11-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),320.7468,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2025-12-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),296.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2026-03-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),279.6667,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2026-04-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),293.3333,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2026-05-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),295.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2026-06-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),280.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2026-07-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),346.25,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2026-08-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),327.5,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2026-09-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),297.5844,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2026-10-01,LOJA,cafe,Café (Quintal aprox. 100 Libra),295.6667,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2021-06-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),15.25,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2021-07-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),14.5667,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2021-08-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),13.3264,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2021-09-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),15.0833,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2021-10-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),14.9167,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2021-11-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),15.2083,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2021-12-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),15.5333,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2022-03-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),19.7083,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2022-04-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),18.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2022-05-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),23.5,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2022-06-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),22.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2022-07-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),21.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2022-08-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),21.3333,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2022-09-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),21.5,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2022-10-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),19.5,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2022-11-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),18.6667,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2022-12-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),18.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2023-01-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),21.1111,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2023-02-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),21.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2023-03-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),19.6943,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2023-04-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),19.6641,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2023-05-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),18.7615,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2023-06-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),16.4917,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2023-07-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),15.4137,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2023-08-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),15.4765,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2023-09-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),13.8155,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2023-10-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),13.1885,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2023-11-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),14.2693,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2023-12-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),15.0431,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2024-03-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),19.4,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2024-04-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),18.9306,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2024-05-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),17.9029,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2024-06-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),16.871,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2024-07-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),17.5,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2024-08-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),17.8613,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2024-09-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),18.3375,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2024-10-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),19.48,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2024-11-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),19.1944,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2024-12-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),19.5,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2025-02-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),21.0625,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2025-03-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),22.0959,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2025-04-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),21.36,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2025-05-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),20.6042,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2025-06-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),19.0458,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2025-07-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),17.3833,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2025-08-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),16.6296,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2025-09-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),16.7667,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2025-10-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),17.0333,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2025-11-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),16.6778,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2025-12-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),16.5,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2026-01-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),17.5,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2026-02-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),18.3,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2026-03-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),18.0412,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2026-04-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),19.958,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2026-05-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),19.6915,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2026-06-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),19.4685,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2026-07-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),19.3867,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2026-08-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),18.9167,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2026-09-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),17.5716,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2026-10-01,LOJA,maiz_duro_seco,Maíz duro seco (Quintal aprox. 100 Libra),17.6128,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2021-01-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),77.9861,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2021-02-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),90.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2021-03-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),91.25,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2021-04-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),82.5,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2021-05-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),80.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2021-06-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),80.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2021-07-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),80.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2021-08-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),82.1429,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2021-09-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),90.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2021-10-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),85.3571,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2021-11-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),80.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2021-12-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),80.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2022-02-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),90.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2022-03-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),90.625,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2022-04-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),95.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2022-05-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),92.5,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2022-06-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),91.6667,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2022-07-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),90.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2022-09-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),135.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2022-10-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),127.3333,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2022-11-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),97.3333,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2023-05-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),95.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2023-06-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),101.25,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2023-07-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),117.5,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2023-08-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),121.125,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2023-09-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),119.48,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2023-10-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),121.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2023-11-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),122.5,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2023-12-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),123.5,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2024-03-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),263.6111,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2024-04-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),390.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2024-05-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),262.5,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2024-06-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),341.6667,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2024-07-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),322.5,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2024-08-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),310.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2024-09-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),302.5,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2024-10-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),305.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2024-11-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),272.5,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2024-12-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),353.75,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2025-04-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),325.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2025-05-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),350.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2025-06-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),329.6774,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2025-07-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),247.5,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2025-08-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),262.5,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2025-09-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),228.75,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2025-10-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),185.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2025-11-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),150.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2025-12-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),195.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2026-01-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),125.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2026-02-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),85.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2026-03-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),97.5,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2026-04-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),107.5,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2026-05-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),150.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2026-06-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),150.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2026-07-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),200.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2026-08-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),225.0,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2026-09-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),228.4167,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
+2026-10-01,ZAMORA CHINCHIPE,cacao,Cacao (Quintal aprox. 100 Libra),183.75,https://servicios.mag.gob.ec/tableros/Territorial_24/Cifras_territoriales
