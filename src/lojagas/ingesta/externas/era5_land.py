@@ -119,7 +119,11 @@ class ERA5Land:
         self.areas = areas or AREAS
 
     def extraer(self, periodo: str) -> pd.DataFrame:
-        """Descarga todo el histórico hasta el año de `periodo` (se escribe en overwrite)."""
+        """Descarga todo el histórico hasta `periodo` inclusive (se escribe en overwrite).
+
+        CDS entrega el año completo publicado; se recorta en `periodo` para que reprocesar
+        un mes pasado dé el mismo resultado y no deje en Raw meses posteriores.
+        """
         anio_fin = date.fromisoformat(periodo).year
         anios = list(range(self.anio_inicio, anio_fin + 1))
         tablas = []
@@ -128,4 +132,5 @@ class ERA5Land:
                 destino = Path(tmp) / f"era5_land_{provincia.replace(' ', '_').lower()}.nc"
                 self.descargador(solicitud_cds(area, anios), destino)
                 tablas.append(netcdf_a_tabla(destino, provincia))
-        return pd.concat(tablas, ignore_index=True)
+        df = pd.concat(tablas, ignore_index=True)
+        return df[df["fecha"] <= pd.Timestamp(periodo)].reset_index(drop=True)

@@ -1,18 +1,11 @@
-"""INAMHI: precipitación total y temperatura media mensual (datosabiertos.gob.ec).
+"""INAMHI: estaciones meteorológicas (nivel 3 del documento de fuentes v4).
 
-Caveat de modelado: el dato del mes a predecir NO existe al momento de predecir.
-Opciones: usar el mes anterior (rezago), la normal climatológica del mes, o
-pronóstico estacional. Documentar la elección en la model card.
+No es una fuente del pipeline mensual y no entra al modelo. Sirve para validar ERA5-Land
+(¿tiene sesgo frente a las estaciones de Loja y Zamora Chinchipe?) y, si hiciera falta, para
+calcular una corrección que se aplicaría en Procesamiento.
+
+La entrega de INAMHI en datosabiertos.gob.ec está cerrada a diciembre de 2019, así que la
+validación es un análisis de una sola vez: notebooks/07_dv_validacion_era5_inamhi.ipynb, con
+las estaciones de referencias/inamhi_estaciones.csv e inamhi_valores.csv (armadas con
+scripts/inamhi_estaciones.py). Por eso no hay una clase `Fuente` aquí.
 """
-
-from __future__ import annotations
-
-import pandas as pd
-
-
-class INAMHI:
-    nombre = "inamhi"
-    disponible_desde_dias = 60  # supuesto: verificar la latencia real de publicación
-
-    def extraer(self, periodo: str) -> pd.DataFrame:
-        raise NotImplementedError
