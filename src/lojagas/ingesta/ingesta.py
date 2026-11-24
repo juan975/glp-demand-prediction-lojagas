@@ -16,6 +16,7 @@ from lojagas.comun.config import Config
 from lojagas.ingesta import odoo_api
 from lojagas.ingesta.externas.calendario import CalendarioEventos
 from lojagas.ingesta.externas.era5_land import ERA5Land
+from lojagas.ingesta.externas.precios_mag import PreciosProductorMAG
 
 
 def _con_metadatos(df: pd.DataFrame, fuente: str, periodo: str) -> pd.DataFrame:
@@ -43,7 +44,8 @@ def ejecutar_odoo(cfg: Config, periodo: str) -> int:
 
 def ejecutar_externas(cfg: Config, periodo: str) -> dict[str, int]:
     versiones = {}
-    for fuente in (CalendarioEventos(), ERA5Land()):  # agregar Petroecuador al implementarla
+    # Las que leen un CSV de referencias van antes de las que dependen de un servicio externo
+    for fuente in (CalendarioEventos(), PreciosProductorMAG(), ERA5Land()):
         datos = fuente.extraer(periodo)
         versiones[fuente.nombre] = lakehouse.escribir(
             _con_metadatos(datos, fuente.nombre, periodo),
