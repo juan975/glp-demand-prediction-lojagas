@@ -65,7 +65,8 @@ def validar(df: pd.DataFrame) -> pd.DataFrame:
     desde, hasta = df["vigencia_desde"].to_numpy(), df["vigencia_hasta"].to_numpy()
     if (desde[1:] <= hasta[:-1]).any():
         raise ValueError("Hay períodos de vigencia que se superponen")
-    if (df[PRECIOS] <= 0).any().any():
+    # `> 0` es falso con NaN: así una celda vacía también falla (con `<= 0` pasaba)
+    if not (df[PRECIOS] > 0).all(axis=None):
         raise ValueError("Hay precios vacíos o no positivos")
     return df
 

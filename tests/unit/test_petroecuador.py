@@ -127,6 +127,13 @@ def test_validar_rechaza_periodos_superpuestos():
         validar(df)
 
 
+@pytest.mark.parametrize("glp", [None, 0.0, -0.5])
+def test_validar_rechaza_precio_vacio_cero_o_negativo(glp):
+    df = _csv([("2026-05-12", "2026-06-11", glp, 5.4, 15, "")])
+    with pytest.raises(ValueError, match="vacíos o no positivos"):
+        validar(df)
+
+
 def test_huecos_entre_periodos():
     df = _csv([("2026-05-12", "2026-06-11", 0.9, 5.4, 15, "")])
     assert huecos(df, "2026-05-01", "2026-06-30") == [
