@@ -14,6 +14,7 @@ import pandas as pd
 from lojagas.comun import lakehouse
 from lojagas.comun.config import Config
 from lojagas.ingesta import odoo_api
+from lojagas.ingesta.externas import ecu911_vias
 from lojagas.ingesta.externas.calendario import CalendarioEventos
 from lojagas.ingesta.externas.era5_land import ERA5Land
 from lojagas.ingesta.externas.petroecuador import PreciosPetroecuador
@@ -56,3 +57,20 @@ def ejecutar_externas(cfg: Config, periodo: str) -> dict[str, int]:
             modo="overwrite",
         )
     return versiones
+
+
+def ejecutar_vias(cfg: Config) -> int:
+    """Foto del día del estado de vías (ECU911). Corre a diario, aparte del DAG mensual.
+
+    Reemplaza el día en vez de agregarlo: un reintento el mismo día no duplica filas.
+    """
+    foto = ecu911_vias.foto_diaria()
+    fecha = foto["fecha"].iloc[0]
+    return lakehouse.reemplazar_periodo(
+        _con_metadatos(foto, "ecu911_vias", fecha),
+        cfg.lakehouse,
+        "raw",
+        "ecu911_vias",
+        columna="fecha",
+        valor=fecha,
+    )

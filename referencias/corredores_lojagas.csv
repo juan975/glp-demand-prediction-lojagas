@@ -1,0 +1,22 @@
+corredor,orden,grupo,provincia,via_ecu911,nota
+guayaquil_catamayo,1,naranjal,GUAYAS,VIA GUAYAQUIL - NARANJAL,Troncal de la Costa desde Pascuales/El Salitral
+guayaquil_catamayo,2,ponce_enriquez,AZUAY,LIMITE PROVINCIAL GUAYAS/AZUAY - ENTRADA VIA A LA ESPERANZA - CAMILO PONCE - LIMITE PROVINCIAL AZUAY/EL ORO,Tramo de la Troncal de la Costa en Azuay
+guayaquil_catamayo,3,el_guabo,EL ORO,EL GUABO - PONCE ENRIQUEZ,
+guayaquil_catamayo,4,hacia_santa_rosa,EL ORO,VIA PASAJE MACHALA,Por Machala; alterna del paso por Pasaje
+guayaquil_catamayo,4,hacia_santa_rosa,EL ORO,EL GUABO - CAÑA QUEMADA - PASAJE,Por Pasaje; alterna del paso por Machala
+guayaquil_catamayo,5,santa_rosa,EL ORO,SANTA ROSA - MACHALA,
+guayaquil_catamayo,5,santa_rosa,EL ORO,PASAJE - SANTA ROSA,
+guayaquil_catamayo,6,saracay,EL ORO,VIA LA AVANZADA - SARACAY,
+guayaquil_catamayo,7,balsas,EL ORO,SARACAY-BALSAS,
+guayaquil_catamayo,8,rio_pindo,EL ORO,BALSAS-RIO PINDO,Límite El Oro/Loja
+guayaquil_catamayo,9,via_a_la_costa,LOJA,SAN PEDRO - LAS CHINCHAS - VIA A LA COSTA,Entrada a Catamayo (planta envasadora San José)
+cuenca_catamayo,1,sayausi_cuenca,AZUAY,SAYAUSI - CUENCA - ENTRONQUE PASO LATERAL DE CUENCA,Cilindros desde Sayausí
+cuenca_catamayo,2,cumbe,AZUAY,ENTRONQUE PASO LATERAL DE CUENCA - CUMBE,
+cuenca_catamayo,3,ona,AZUAY,LA JARATA - LIMITE PROVINCIAL AZUAY/LOJA (OÑA),Límite Azuay/Loja
+cuenca_catamayo,4,saraguro,LOJA,VÍA SAN LUCAS - SARARGURO,
+cuenca_catamayo,5,loja_cuenca,LOJA,LOJA  - CUENCA,
+cuenca_catamayo,6,loja_catamayo,LOJA,CATAMAYO - VIA LOJA,
+catamayo_yantzaza,1,loja_catamayo,LOJA,CATAMAYO - VIA LOJA,También es el reparto Catamayo → Loja
+catamayo_yantzaza,2,loja_zamora,ZAMORA CHINCHIPE,ZAMORA - LOJA,Vía nueva
+catamayo_yantzaza,2,loja_zamora,ZAMORA CHINCHIPE,VIA ANTIGUA ZAMORA  - LOJA,Alterna de la vía nueva
+catamayo_yantzaza,3,zamora_yantzaza,ZAMORA CHINCHIPE,VÍA ZAMORA - YANTZAZA,Llega a la bodega de Yantzaza

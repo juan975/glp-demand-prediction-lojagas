@@ -2,6 +2,7 @@
 
 Cada subcomando corresponde a un artefacto del diagrama de despliegue:
     Contenedor Ingesta        → ingesta-odoo, ingesta-externas   (ingesta.py)
+                              → ingesta-vias (diario)            (ingesta.py)
     Contenedor Procesamiento  → curacion                         (curacion.py)
                               → ingenieria-caracteristicas       (ingenieria_caracteristicas.py)
     Contenedor ML             → entrenar                         (pipeline_entrenamiento.py)
@@ -30,6 +31,12 @@ def _ingesta_externas(cfg, a):
     return ejecutar_externas(cfg, a.periodo)
 
 
+def _ingesta_vias(cfg, a):
+    from lojagas.ingesta.ingesta import ejecutar_vias
+
+    return ejecutar_vias(cfg)
+
+
 def _curacion(cfg, a):
     from lojagas.procesamiento.curacion import ejecutar
 
@@ -51,6 +58,8 @@ def _pendiente(cfg, a):
 SUBCOMANDOS = {
     "ingesta-odoo": ("Odoo API → Raw", _ingesta_odoo, True),
     "ingesta-externas": ("Fuentes externas → Raw", _ingesta_externas, True),
+    # Diario y sin mes: guarda el estado de vías de hoy (el servicio no tiene historial)
+    "ingesta-vias": ("Estado de vías ECU911 (foto del día) → Raw", _ingesta_vias, False),
     "curacion": ("Raw → Curated", _curacion, True),
     "ingenieria-caracteristicas": ("Curated → Feature", _ingenieria, False),
     "entrenar": ("Walk-forward de candidatos → MLflow Tracking", _pendiente, False),
