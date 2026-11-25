@@ -8,18 +8,29 @@ from lojagas.procesamiento.eventos import TIPO_FERIADO, dias_de_eventos, dias_fe
 from lojagas.procesamiento.ingenieria_caracteristicas import construir
 
 
+def _anios_con_feriados(eventos):
+    feriados = eventos[eventos["tipo_evento"] == TIPO_FERIADO]
+    return set(feriados["fecha_inicio"].dt.year)
+
+
 def test_dias_feriado_cuenta_y_deja_vacios_los_anios_sin_calendario():
-    meses = pd.Series(pd.to_datetime(["2024-02-01", "2024-06-01", "2027-02-01"]))
-    dias = dias_feriado(meses, CalendarioEventos().extraer())
+    eventos = CalendarioEventos().extraer()
+    # El primer año que el calendario todavía no tiene: no se rompe al agregar un año nuevo
+    sin_calendario = max(_anios_con_feriados(eventos)) + 1
+    meses = pd.Series(pd.to_datetime(["2024-02-01", "2024-06-01", f"{sin_calendario}-02-01"]))
+    dias = dias_feriado(meses, eventos)
     assert dias.iloc[:2].tolist() == [2, 0]  # Carnaval; junio sin feriados
-    assert np.isnan(dias.iloc[2])  # 2027 todavía no está en el calendario: no es 0
+    assert np.isnan(dias.iloc[2])  # año sin calendario: vacío, no 0
 
 
 def test_dias_de_eventos_expande_los_rangos():
-    feriados = dias_de_eventos(CalendarioEventos().extraer(), TIPO_FERIADO)
+    eventos = CalendarioEventos().extraer()
+    feriados = pd.Series(dias_de_eventos(eventos, TIPO_FERIADO))
     assert {pd.Timestamp("2024-02-12"), pd.Timestamp("2024-02-13")} <= set(feriados)
-    # 10 feriados por año, y Carnaval son dos días: 11 días × 4 años
-    assert len(feriados) == 44
+    # 10 feriados por año, y Carnaval son dos días: 11 días en cada año cargado
+    por_anio = feriados.dt.year.value_counts()
+    assert set(por_anio.index) == _anios_con_feriados(eventos)
+    assert (por_anio == 11).all(), por_anio.to_dict()
 
 
 def test_dias_de_venta_con_feriados(serie_mensual):
