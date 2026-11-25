@@ -59,7 +59,7 @@ COLUMNAS = [
 # El servidor del ECU911 entrega su certificado sin el intermedio de Sectigo. El navegador lo
 # completa solo; Python no, y rechaza la conexión. En vez de desactivar la verificación, se
 # agrega ese intermedio (público, de Sectigo) a los certificados raíz de certifi.
-CERT_INTERMEDIO = Path(__file__).with_name("sectigo_dv_r36.pem")
+CERT_INTERMEDIO = Path(__file__).with_name("sectigo_dv_r36.crt")
 
 # (inicio, límite) → respuesta JSON del servicio
 Descargador = Callable[[int, int], dict]
